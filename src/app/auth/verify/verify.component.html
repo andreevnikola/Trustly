@@ -1,0 +1,20 @@
+<div id="content">
+    <div id="demo" *ngIf="demo">
+        <img src="assets/images/newMail.gif" alt="new mail">
+        <p>Получилисте верификационния си линк на E-MAIL!</p>
+    </div>
+    <ng-container *ngIf="!demo">
+        <div *ngIf="loading">
+            <img src="assets/images/loading.gif" alt="loading">
+        </div>
+        <div *ngIf="!loading">
+            <div class="error" *ngIf="error">
+                Нещо се обърка! <br>
+                <button>Нова верификация</button>
+            </div>
+            <div class="confirmed" *ngIf="!error">
+                Успешно валидирахте E-MAIL адреса си!
+            </div>
+        </div>
+    </ng-container>
+</div>

@@ -1,0 +1,9 @@
+<div id="container">
+    <img src="assets/images/loading.gif" alt="loading" *ngIf="loading" id="loading">
+    <ng-container *ngIf="!loading">
+        <div id="chalanges">
+            <h1 *ngIf="data.length < 1 || !data">Нямам качени ЧАЛИНДЖИ! Не се срамувай бъди първи! <a routerLink="chalange/upload">Кликни ТУК</a></h1>
+            <app-preview-chalange id="chalange" *ngFor="let chalange of data; let i = index" [chalange]="chalange" [creator]="creators[i]"></app-preview-chalange>
+        </div>
+    </ng-container>
+</div>

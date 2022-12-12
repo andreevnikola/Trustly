@@ -1,0 +1,197 @@
+#unActiveMail{
+    width: fit-content;
+    left: 50%;
+    top: 50%;
+    position: absolute;
+    transform: translate(-50%, -50%);
+    padding: 32px;
+    border-radius: 10px;
+    border: 2px solid grey;
+    background: linear-gradient(45deg, #F2F2F3, #f7f7f7);
+    max-width: 360px;
+    font-size: 22px;
+    .confirmMail{
+        cursor: pointer;
+        color: red;
+        font-size: 20px;
+        font-weight: bold;
+        padding: 10px;
+        width: 100%;
+    }
+}
+
+form{
+    width: fit-content;
+    left: 50%;
+    position: relative;
+    margin-top: 75px;
+    transform: translate(-50%, 0);
+    padding: 32px;
+    border-radius: 10px;
+    border: 2px solid grey;
+    background: linear-gradient(45deg, #F2F2F3, #f7f7f7);
+    max-width: 410px;
+    h1{
+        margin-top: 0px;
+        font-size: 31px;
+        text-align: center;
+        font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    }
+    input{
+        width: calc(99% - 7px);
+        padding: 4px;
+    }
+    #statusP{
+        margin-top: 12px;
+    }
+    p{
+        margin-bottom: 2px;
+        font-size: 19px;
+        margin-top: 10px;
+    }
+    label{
+        padding: 10px;
+        padding-left: 25px;
+        padding-right: 25px;
+        position: relative;
+        cursor: pointer;
+    }
+    textarea{
+        width: 99%;
+        height: 100px;
+    }
+    button{
+        padding: 8px;
+        width: calc(99% + 5px);
+        cursor: pointer;
+    }
+    .miniature img{
+        margin-top: 5px;
+        border: 1px solid black;
+        width: 409px;
+        height: 230px;
+    }
+    #chooseStatus{
+        font-family: Verdana, Geneva, Tahoma, sans-serif;
+        padding: 5px;
+        font-size: 13px;
+        cursor: pointer;
+        width: 100%;
+    }
+    select option{
+        padding: 2px;
+    }
+    .description_preview{
+        background-color: white;
+        border-radius: 5px;
+        border: 1px solid grey;
+        padding: 10px;
+        padding-top: 0px;
+        padding-bottom: 0px;
+        p{
+            margin: 0;
+            padding: 0;
+        }
+    }
+    .error{
+        color: red;
+        margin-top: 0px;
+    }
+    #submit{
+        margin-top: 15px;
+        font-size: 18px;
+        font-weight: bold;
+        img{
+            width: 15px;
+        }
+    }
+    #submit:disabled{
+        img{
+            filter: contrast(0.00005);
+        }
+    }
+    #loading{
+        padding: 10px;
+        width: fit-content;
+        position: relative;
+        transform: translate(-50%, 0);
+        left: 50%;
+        img{
+            width: 250px;
+        }
+    }
+    #content{
+        h2{
+            margin-top: -2px;
+            font-size: 19px;
+        }
+        #part{
+            background: rgb(252, 249, 244);
+            border-radius: 10px;
+            padding: 15px;
+            border: 1px solid rgb(163, 163, 163);
+            margin-top: 10px;
+            h3{
+                padding: 0;
+                margin: 0;
+                text-align: center;
+            }
+            #removeStep{
+                position: absolute;
+                margin-top: -15px;
+                font-size: 28px;
+                left: calc(100% - 57px);
+                cursor: pointer;
+                color: red;
+                font-weight: bold;
+                font-family: 'Courier New', Courier, monospace;
+            }
+            #removeStepImage{
+                padding: 5px;
+                margin-bottom: -35px;
+                transform: translate(-5px, 0);
+                float: right;
+                z-index: 50;
+                font-size: 28px;
+                left: calc(100% - 90px);
+                cursor: pointer;
+                color: red;
+                font-weight: bold;
+                font-family: 'Courier New', Courier, monospace;
+            }
+            .imagesContainer{
+                background-color: white;
+                border: 1px solid rgb(163, 163, 163);
+                border-radius: 10px;
+                padding: 15px;
+                max-height: 330px;
+                overflow-x: auto;
+                img{
+                    width: 99%;
+                }
+                video{
+                    width: 99%;
+                }
+                button{
+                    width: 99%;
+                }
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 520px) {
+    form{
+        max-width: 305px;
+        h1{
+            font-size: 22px;
+        }
+        .miniature img{
+            width: 292px;
+            height: 164px;
+        }
+        #content{
+            max-width: 295px;
+        }
+    }
+}

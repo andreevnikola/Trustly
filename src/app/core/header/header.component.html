@@ -1,0 +1,34 @@
+<header>
+	<nav id="mainMenu">
+		<a routerLink="/" id="withImage"><img src="assets/images/logo_without_bg.png" alt=""></a>
+		<a routerLink="/">Начало</a>
+		<a routerLink="chalange/active">Активни</a>
+		<a routerLink="chalange/followed">Следвани</a>
+		<a routerLink="chalange/upload">Сподели</a>
+		<ng-container *ngIf="!authService.loged">
+			<a routerLink="auth/join" class="auth">Приседини се</a>
+			<a routerLink="auth/login" class="auth">Влез</a>
+		</ng-container>
+		<ng-container *ngIf="authService.loged">
+			<a [routerLink]="'profile/'+name" class="auth">Профил</a>
+			<a (click)="logoutHandler()" routerLink="/" class="auth" style="color: red;">Изход</a>
+		</ng-container>
+	</nav>
+	<button id="activateMenu" (click)="showMobileMenu()"><img [ngClass]="{'rotated': mobileMenuShown}" style="transition: 0.25s;" height="35px" src="assets/svg/bars-solid.svg" alt="menu"></button>
+	<div id="phoneMenuHidden" *ngIf="!mobileMenuShown"><a routerLink="/"><img src="assets/images/logo_without_bg.png" alt=""></a></div>
+	<nav id="phoneMenu" *ngIf="mobileMenuShown" [@menu_animation]>
+		<a (click)="mobileMenuShown = false" routerLink="/" id="withImageMobile"><img src="assets/images/logo_without_bg.png" alt=""></a><br>
+		<a (click)="mobileMenuShown = false" routerLink="/">Начало</a><hr>
+		<a (click)="mobileMenuShown = false" routerLink="chalange/active">Активни</a><hr>
+		<a (click)="mobileMenuShown = false" routerLink="chalange/followed">Следвани</a><hr>
+		<a (click)="mobileMenuShown = false" routerLink="chalange/upload">Сподели</a><hr>
+		<ng-container *ngIf="!authService.loged">
+			<a (click)="mobileMenuShown = false" routerLink="auth/join" class="authMobile">Приседини се</a><hr>
+			<a (click)="mobileMenuShown = false" routerLink="auth/login" class="authMobile">Влез</a>
+		</ng-container>
+		<ng-container *ngIf="authService.loged">
+			<a (click)="mobileMenuShown = false" [routerLink]="'profile/'+name" class="authMobile">Профил</a><hr>
+			<a (click)="mobileMenuShown = false; logoutHandler()" routerLink="/" class="authMobile" style="color: red;">Изход</a>
+		</ng-container>
+	</nav>
+</header>

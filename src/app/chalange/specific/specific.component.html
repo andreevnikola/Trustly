@@ -1,0 +1,93 @@
+<div id="container">
+    <img src="assets/images/loading.gif" alt="loading" *ngIf="loading" id="loading">
+    <ng-container *ngIf="!loading">
+        <div id="top">
+            <a [routerLink]="'/profile/'+username"><img id="logo" [src]="profileIcon" alt="иконката на потребителя"></a>
+            <div [ngClass]="{'notYourAcc': !(username === myUserName)}">
+                <a [routerLink]="'/profile/'+username"><p class="name">{{username}}</p></a>
+                <p class="mail">{{user_mail}}</p>
+                <a routerLink="/auth/profile/settings" *ngIf="username === myUserName"><button>Редактиране<img src="assets/svg/edit.svg" alt="edit"></button></a>
+                <button [style]="subscribed ? 'color: red;' : 'color: black;'" [disabled]="!myUserName" *ngIf="!(username === myUserName)" (click)="!subscribed ? subscribeHandler() : unsubscribeHandler()"> {{!subscribed ? 'Последвай' : 'Отпоследвай'}} </button>
+            </div>
+            <div id="shitContainer">
+                <a [routerLink]="'/profile/'+username">
+                    <div id="stats" class="top_level_stats">
+                        <div class="info">
+                            <p class="number">{{chalanges_nmb}}</p>
+                            <p class="subinfo">цели</p>
+                        </div>
+                        <div class="info">
+                            <p class="number">{{subs}}</p>
+                            <p class="subinfo">абонати</p>
+                        </div>
+                        <div class="info">
+                            <p class="number">{{likes}}</p>
+                            <p class="subinfo">харесвания</p>
+                        </div>
+                        <div class="info" style="border-right: 0;">
+                            <p class="number" id="reportGlaven">{{reports}}</p>
+                            <p class="subinfo" id="report">репорта</p>
+                        </div>
+                    </div>
+                    </a>
+            </div>
+        </div>
+        <div id="aligner">
+            <div id="statsBottomLevel">
+                <div class="info">
+                    <p class="number">{{chalanges_nmb}}</p>
+                    <p class="subinfo">чалинджа</p>
+                </div>
+                <div class="info" style="padding-left: 15px;"> 
+                    <p class="number">{{subs}}</p>
+                    <p class="subinfo">абонати</p>
+                </div>
+                <div class="info">
+                    <p class="number">{{likes}}</p>
+                    <p class="subinfo">харесвания</p>
+                </div>
+                <div class="info" style="border-right: 0;">
+                    <p class="number" id="reportGlaven">{{reports}}</p>
+                    <p class="subinfo" id="report">репорта</p>
+                </div>
+            </div>
+        </div>
+        <br>
+        <div id="mainData">
+            <p class="title">{{data.title}}</p>
+            <img [src]="data.thumnail" alt="thumnail" id="thumnail">
+            <div class="description" markdown [data]="data.description"></div>
+            <p class="status" [style]="data.status=='завършен' ? 'color: black;' : data.status=='започнат' ? 'color: yellow; text-shadow: 1px 1px 1px black' : 'color: green'">{{data.status}} <strong>{{data.status=='завършен' ? '🏁' : data.status=='започнат' ? '🟡' : '🟢'}}</strong></p>
+            <br><br>
+            <div id="step" *ngFor="let step of data.steps">
+                <p class="title">{{step.title}}</p>
+                <div id="images">
+                    <ng-container *ngFor="let img of step.images">
+                        <img [src]="img[0]" alt="image" *ngIf="img[1] === 'image'" (click)="maximizedImage = [img[0], img[1]]">
+                        <video [src]="img[0]" controls *ngIf="img[1] === 'video'"></video>
+                    </ng-container>
+                </div>
+                <p class="description">{{step.description}}</p>
+            </div>
+            <div id="comments" *ngIf="!(!comments || comments.length < 1)">
+                <div id="comment" *ngFor="let comment of comments; let i = index">
+                    <a [routerLink]="'/profile/'+comment.commentator"><p class="commentator"><img [src]="comment.logo ? comment.logo : 'assets/images/avatar.png'" id="logo"> {{comment.commentator}}</p></a>
+                    <img src="assets/images/arrow_connecting.png" id="showCommentator">
+                    <p class="message">{{comment.message}}</p>
+                    <p class="date_time">{{comment.time}}ч, {{comment.date}}</p>
+                    <button id="likeComment" [disabled]="!myUserName" (click)="!likedComments[i] ? likeCommentHandler(i) : likeCommentHandler(i)"><img [src]="!likedComments[i] ? 'assets/svg/heart-regular.svg' : 'assets/svg/heart-solid.svg'" alt="like comment"><span>5</span></button>
+                </div>
+            </div>
+            <input #message type="text" id="comment_send" [disabled]="!myUserName" placeholder="Коментирайте">
+            <button class="reaction" [disabled]="!myUserName" (click)="sendCommentHandler(message.value)"><img src="assets/svg/paper-plane-solid.svg" alt="send comment"></button>
+            <button class="reaction" id="like" [style]="liked ? 'background: #8c93f5;' : 'background: white;'" (click)="!liked ? likeChalangeHandler() : dislikeChalangeHadnler()" [disabled]="!myUserName"><img src="assets/svg/thumbs-up-solid.svg" alt="like"><span>{{data.likes}}</span></button>
+        </div>
+    </ng-container>
+    <br><br>
+</div>
+
+<div id="backgroundHider" *ngIf="maximizedImage" (click)="maximizedImage = false" [@maximizeImage]></div>
+<ng-container *ngIf="maximizedImage">
+    <img [@maximizeImage] [src]="maximizedImage[0]" alt="image" *ngIf="maximizedImage[1] === 'image'" id="maximizedImage" (dblclick)="seeImage(maximizedImage[0])">
+    <video [@maximizeImage] [src]="maximizedImage[0]" controls *ngIf="maximizedImage[1] === 'video'" id="maximizedImage" (dblclick)="seeImage(maximizedImage[0])"></video>
+</ng-container>

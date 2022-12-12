@@ -1,0 +1,30 @@
+#content{
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    padding: 40px;
+    border-radius: 15px;
+    border: 2px solid grey;
+    background: linear-gradient(45deg, #F2F2F3, #f7f7f7);
+    .error{
+        font-size:23px;
+        color: red;
+        font-weight: bold;
+        font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+        button{
+            padding: 5px;
+            width: 170px;
+            cursor: pointer;
+        }
+    }
+}
+
+#demo{
+    text-align: center;
+    font-size: 18px;
+    max-width: 280px;
+    img{
+        width: 250px;
+    }
+}

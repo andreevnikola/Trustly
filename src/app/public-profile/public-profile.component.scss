@@ -1,0 +1,185 @@
+#container{
+    margin-top: 75px;
+    width: fit-content;
+    position: absolute;
+    left: 50%;
+    width: 95%;
+    max-width: 850px;
+    height: calc(99% + -107px);
+    transform: translate(-50%, 0);
+    // border-left: 0.5px solid rgba(128, 128, 128, 0.5);
+    // border-right: 0.5px solid rgba(128, 128, 128, 0.5);
+    // box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.322);
+    background-color: white;
+    #statsBottomLevel{
+        display: none;
+    }
+    .top_level_stats{
+        display: block;
+    }
+    #chalanges{
+        position: relative;
+        left: 50%;
+        transform: translate(-50%, 0);
+        display: inline-grid;
+        align-items: left;
+        justify-content: left;
+        column-gap: 7px;
+        width: fit-content;
+        grid-template-columns: auto auto;
+    }
+    #stats{
+        padding-right: 5px;
+        align-items: flex-end;
+        justify-content: end;
+        position: absolute;
+        width: 100%;
+        display: flex;
+        transform: translate(-15px, 0);
+        margin-top: 15px !important;
+        .info{
+            height: 62px;
+            margin-top: 15px;
+            text-align: center;
+            border-right: 1px solid rgb(70, 70, 70);
+            padding-right: 15px;
+            padding-left: 5px;
+            width: fit-content;
+        }
+        .number{
+            font-size: 60px;
+            font-weight: bold;
+            font-family: Verdana, Geneva, Tahoma, sans-serif;
+            color: rgb(70, 70, 70);
+            margin-bottom: 0;
+            margin-top: -15px;
+        }
+        .subinfo{
+            font-size: 12px;
+            margin-top: -13px;
+        }
+    }
+    #top{
+        width: 100%;
+        text-align: left;
+        font-size: 22px;
+        display: flex;
+        align-items: flex-start;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        padding-bottom: 15px;
+        border-bottom: 1px solid rgba(128, 128, 128, 0.479);
+        .notYourAcc{
+            margin-top: -15px !important;
+            font-size: 25px;
+            .mail{
+                margin-top: -7px;
+                font-size: 14px;
+            }
+            button{
+                font-size: 14px;
+            }
+        }
+        .name{
+            font-weight: bold;
+            margin-bottom: 0px;
+            width: fit-content;
+        }
+        .mail{
+            color: rgb(59, 59, 59);
+            width: fit-content;
+            margin-top: -2px;
+            font-size: 11px;
+            margin-bottom: -5px;
+        }
+        #logo{
+            border-radius: 50%;
+            width: 100px;
+            height: 100px;
+            box-shadow: 0px 0px 3px black;
+        }
+        div{
+            margin-top: -10px;
+            margin-left: 10px;
+        }
+        button{
+            transform: translate(0, 0);
+            z-index: 1000;
+            margin-top: 0px;
+            cursor: pointer;
+            padding: 5px;
+            font-size: 10px;
+            font-weight: bold;
+            img{
+                margin-bottom: -2px;
+                width: 10px;
+                height: 10px;
+                margin-left: 2px;
+            }
+        }
+        button:disabled{
+            cursor: not-allowed;
+            filter: contrast(0.2);
+        }
+    }
+}
+
+#aligner{
+    width: 100%;
+    justify-content: center;
+    display: none;
+    margin-top: -10px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid rgba(128, 128, 128, 0.479);
+    #statsBottomLevel{
+        width: fit-content;
+        position: relative;
+        margin-top: 10px;
+        .info{
+            height: 62px;
+            margin-top: 15px;
+            text-align: center;
+            border-right: 1px solid rgb(70, 70, 70);
+            padding-right: 15px;
+            padding-left: 10px;
+            width: fit-content;
+        }
+        .number{
+            font-size: 60px;
+            font-weight: bold;
+            font-family: Verdana, Geneva, Tahoma, sans-serif;
+            color: rgb(70, 70, 70);
+            margin-bottom: 0;
+            margin-top: -15px;
+        }
+        .subinfo{
+            font-size: 12px;
+            margin-top: -13px;
+        }
+    }
+}
+
+#report{
+    color: rgb(255, 58, 58) !important;
+}
+
+#reportGlaven{
+    color: rgb(216, 79, 79) !important;
+}
+
+@media screen and (max-width: 755px) {
+    .top_level_stats{
+        display: none !important;
+    }
+    #statsBottomLevel{
+        display: flex !important;
+    }
+    #aligner{
+        display: flex;
+    }
+}
+
+@media screen and ( max-width: 750px ){
+    #chalanges{
+        grid-template-columns: auto !important;
+    }
+}

@@ -1,0 +1,38 @@
+<form #form="ngForm" (ngSubmit)="handleRegister(name.value, email.value, password.value)">
+    <h2>Регистрирай се</h2>
+    <p>Потребителско име: </p>
+    <input type="text" placeholder="Иван Иванов" #name="ngModel" ngModel name="name" required minlength="7" (change)="usernameTaken = false">
+    <ng-container *ngIf="name.touched">
+        <p class="error" *ngIf="name.errors?.['required']">
+            Името е задъчлжително!
+        </p>
+        <p class="error" *ngIf="name.errors?.['minlength']">
+            Името трябва да е по-дълго от 6 знака!
+        </p>
+        <p class="error" *ngIf="usernameTaken">
+            Потребителското име е заето!
+        </p>
+    </ng-container>
+    <p>E-MAIL: </p>
+    <input type="text" placeholder="jhonedoe@example.com" #email="ngModel" name="email" ngModel required [appEmail]="email">
+    <ng-container *ngIf="email.touched">
+        <p class="error" *ngIf="email.errors?.['required']">
+            Email е задължителен!
+        </p>
+        <p class="error" *ngIf="!email.errors?.['required'] && email.errors?.['appEmailValidator']">
+            Email не е валиден!
+        </p>
+    </ng-container>
+    <p>Парола: </p>
+    <input [type]="passwordType" placeholder="*********" #password="ngModel" name="password" ngModel required minlength="5"><br>
+    <span class="showPassword" (click)="passwordType === 'password' ? passwordType = 'text' : passwordType = 'password'">{{passwordType === 'password' ? 'покажи' : 'скрий'}} парола</span>
+    <ng-container *ngIf="password.touched">
+        <p class="error" *ngIf="password.errors?.['required']">
+            Паролата е задъчлжително!
+        </p>
+        <p class="error" *ngIf="password.errors?.['minlength']">
+            Паролата трябва да е по-дълго от 4 знака!
+        </p>
+    </ng-container>
+    <button [disabled]="form.invalid">Регистрирай се</button>
+</form>

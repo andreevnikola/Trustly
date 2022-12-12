@@ -1,0 +1,10 @@
+<div id="chalange" (click)="maximizeChalangeHandler()">
+    <p class="status" [style]="chalange.status=='завършен' ? 'color: black;' : chalange.status=='започнат' ? 'color: yellow; text-shadow: 1px 1px 1px black' : 'color: green'">{{chalange.status}} <strong>{{chalange.status=='завършен' ? '🏁' : chalange.status=='започнат' ? '🟡' : '🟢'}}</strong></p>
+    <p class="creator" *ngIf="creator?.name">{{creator.name}}</p>
+    <p class="likes">{{chalange.likes ? chalange.likes : 0}} <img src="assets/svg/thumbs-up-solid.svg" alt="likes"></p>
+    <img *ngIf="creator?.logo" [src]="creator.logo" alt="creator logo" id="logo">
+    <img [src]="chalange.thumnail" alt="thumnail" id="main_img">
+    <p class="title">{{chalange.title}}</p>
+    <p class="date">{{chalange.date}}</p>
+    <div class="description" markdown [data]="chalange.description"></div>
+</div>

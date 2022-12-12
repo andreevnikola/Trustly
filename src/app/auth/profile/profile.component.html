@@ -1,0 +1,75 @@
+<form *ngIf="!edit && !editConfirm">
+    <div>
+        <img [src]="url" *ngIf="url">
+        <img src="assets/images/avatar.png" *ngIf="!url">
+    </div>
+    <p>Потребителско име: <br><strong>{{name_}}</strong></p><hr>
+    <p>E-MEIL: <br><strong>{{mail_}}</strong></p>
+    <a (click)="confirmMail()" class="subInfo" *ngIf="!confirmed">E-MAIL не е активиран!</a>
+    <hr>
+    <p>Парола: <strong>СКРИТА</strong></p><br>
+    <button type="button" (click)="edit=true">РЕДАКТИРАЙ</button>
+</form>
+
+<form id="profile" #form="ngForm" *ngIf="edit" (ngSubmit)="continueEditing(name.value, mail.value, password.value, form)">
+    <div>
+        <img [src]="url" *ngIf="url">
+        <img src="assets/images/avatar.png" *ngIf="!url">
+    </div>
+    <p>Профилна снимка: </p>
+    <button type="button" id="chooseImage"><label for="file" class="btn">Избери снимка</label></button>
+    <input style="display: none;" id="file" type="file" accept="image/*" name="image" id="file" #image="ngModel" ngModel (change)="fileChoosen($event)">
+    <p>Потребителско име: </p>
+    <input (change)="usernameTaken = false;" type="text" name="name" [ngModel]="name_" #name="ngModel" placeholder="Иван Иванов" minlength="7" required>
+    <ng-container *ngIf="name.touched">
+        <p class="error" *ngIf="name.errors?.['required']">
+            Името е задъчлжително!
+        </p>
+        <p class="error" *ngIf="name.errors?.['minlength']">
+            Името трябва да е по-дълго от 6 знака!
+        </p>
+        <p class="error" *ngIf="usernameTaken">
+            Потребителското име е заето!
+        </p>
+    </ng-container>
+    <p>E-MEIL: </p>
+    <input type="text" name="email" [ngModel]="mail_" #mail="ngModel" placeholder="jhonedoe@example.com" required [appEmail]="mail">
+    <ng-container *ngIf="mail.touched">
+        <p class="error" *ngIf="mail.errors?.['required']">
+            Email е задължителен!
+        </p>
+        <p class="error" *ngIf="!mail.errors?.['required'] && mail.errors?.['appEmailValidator']">
+            Email не е валиден!
+        </p>
+    </ng-container>
+    <p>Парола: </p>
+    <input type="password" name="password" ngModel #password="ngModel" placeholder="********" minlength="5">
+    <ng-container *ngIf="password.touched">
+        <p class="error" *ngIf="password.errors?.['minlength']">
+            Паролата трябва да е по-дълго от 4 знака!
+        </p>
+    </ng-container>
+    <button id="submit" [disabled]="form.invalid">Обнови</button>
+    <button id="submit" style="margin-top: 5px; color: red;" type="button" (click)="this.editConfirm = false; this.edit = false;">Откажи</button>
+</form>
+
+<form id="profile" #form="ngForm" *ngIf="editConfirm" (ngSubmit)="confirm(form)">
+    <ng-container *ngIf="loading">
+        <img src="assets/images/loading.gif" alt="loading">
+    </ng-container>
+    <ng-container *ngIf="!loading">
+        <p>За да направите промени по акунта си, моля въведете паролата си!</p>
+        <br>
+        <input (change)="passwordNotWright=false;" type="password" name="password" [(ngModel)]="oldPass" #oldPassPrivate="ngModel" placeholder="********" required minlength="5">
+        <ng-container *ngIf="oldPassPrivate.touched">
+            <p class="error" *ngIf="oldPassPrivate.errors?.['required']">
+                Паролата е задъчлжително!
+            </p>
+            <p class="error" *ngIf="oldPassPrivate.errors?.['minlength']">
+                Паролата трябва да е по-дълго от 4 знака!
+            </p>
+        </ng-container>
+        <p class="error" *ngIf="passwordNotWright">Сгрешена парола!</p>
+        <button  id="submit" [disabled]="form.invalid">Потвърди</button>
+    </ng-container>
+</form>

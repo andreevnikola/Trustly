@@ -1,0 +1,58 @@
+<!-- <div id="background"></div> -->
+<div id="container">
+    <img src="assets/images/loading.gif" alt="loading" *ngIf="loading" id="loading">
+    <ng-container *ngIf="!loading">
+        <div id="top">
+            <img id="logo" [src]="profileIcon ? profileIcon : 'assets/images/avatar.png'" alt="иконката на потребителя">
+            <div id="stats" class="top_level_stats">
+                <div class="info">
+                    <p class="number">{{chalanges_nmb}}</p>
+                    <p class="subinfo">цели</p>
+                </div>
+                <div class="info">
+                    <p class="number">{{subs}}</p>
+                    <p class="subinfo">абонати</p>
+                </div>
+                <div class="info">
+                    <p class="number">{{likes}}</p>
+                    <p class="subinfo">харесвания</p>
+                </div>
+                <div class="info" style="border-right: 0;">
+                    <p class="number" id="reportGlaven">{{reports}}</p>
+                    <p class="subinfo" id="report">репорта</p>
+                </div>
+            </div>
+            <div [ngClass]="{'notYourAcc': !(username === myUserName)}">
+                <p class="name">{{username}}</p>
+                <p class="mail">{{user_mail}}</p>
+                <a routerLink="/auth/profile/settings" *ngIf="username === myUserName"><button>Редактиране<img src="assets/svg/edit.svg" alt="edit"></button></a>
+                <button [style]="subscribed ? 'color: red;' : 'color: black;'" [disabled]="!myUserName" *ngIf="!(username === myUserName)" (click)="!subscribed ? subscribeHandler() : unsubscribeHandler()"> {{!subscribed ? 'Последвай' : 'Отпоследвай'}} </button>
+            </div>
+        </div>
+        <div id="aligner">
+            <div id="statsBottomLevel">
+                <div class="info">
+                    <p class="number">{{chalanges_nmb}}</p>
+                    <p class="subinfo">чалинджа</p>
+                </div>
+                <div class="info" style="padding-left: 15px;"> 
+                    <p class="number">{{subs}}</p>
+                    <p class="subinfo">абонати</p>
+                </div>
+                <div class="info">
+                    <p class="number">{{likes}}</p>
+                    <p class="subinfo">харесвания</p>
+                </div>
+                <div class="info" style="border-right: 0;">
+                    <p class="number" id="reportGlaven">{{reports}}</p>
+                    <p class="subinfo" id="report">репорта</p>
+                </div>
+            </div>
+        </div>
+        <br>
+        <div id="chalanges">
+            <app-preview-chalange *ngFor="let chalange of chalanges" [chalange]="chalange"></app-preview-chalange>
+        </div>
+    </ng-container>
+    <!-- {{chalanges | json}} -->
+</div>

@@ -1,0 +1,120 @@
+nav{
+    position: fixed;
+    top: 0;
+    padding-top: 15px;
+    margin-left: 160px;
+    background: #F2F2F3;
+    width: calc(100% - 160px);
+    padding-bottom: 15px;
+    z-index: 2;
+
+    a{
+        margin-right: 15px;
+        text-decoration: none;
+        color: rgb(81,81,81);
+        font-weight: bold;
+        font-size: 20px;
+        margin-left: 0;
+        padding-left: 5px;
+        padding-right: 5px;
+        border-radius: 0px;
+        margin-left: 5px;
+    }
+    a:hover{
+        border: 1px solid #FF8653;
+        border-radius: 5px;
+        padding-left: 4px;
+        padding-right: 4px;
+    }
+    .auth{
+        float: right;
+    }
+    img{
+        max-width: 150px;
+    }
+}
+
+#phoneMenu{
+    width: 100% !important;
+    position: fixed;
+    top: 0;
+    z-index: 10;
+    padding-top: 5px;
+    margin-left: 0px;
+    background: #F2F2F3;
+    width: calc(100% - 160px);
+    padding-bottom: 15px;
+    display: none;
+    text-align: center;
+}
+
+#withImageMobile{
+    position: fixed;
+    background: #F2F2F3;
+    top: 0px;
+    left: -10px;
+    width: 120px;
+    max-height: 48px;  
+}
+#withImageMobile:hover{
+    border: 0px solid #FF8653;
+}
+
+#activateMenu{
+    display: none;
+    position: fixed;
+    top: 0;
+    right: 0;
+    color: red;
+    z-index: 50 !important;
+    padding: 6px;
+    padding-left: 12px;
+    padding-right: 10px;
+    cursor: pointer;
+}
+
+#withImage{
+    position: fixed;
+    background: #F2F2F3;
+    top: -2px;
+    left: -5px;
+    max-height: 54.5px;
+}
+
+.rotated{
+    transform: rotate(-90deg);
+}
+
+#phoneMenuHidden{
+    background: #F2F2F3;
+    display: none;
+    width: 100%;
+    border: 1px solid black;
+    height: 52px;
+    position: fixed;
+    z-index: 2;
+
+    img{
+        height: 67px;
+        margin-top: -5px;
+    }
+}
+
+#withImage:hover{
+    border: 0px solid #FF8653;
+}
+
+@media screen and (max-width: 860px) {
+    #phoneMenu{
+        display: block;
+    }
+    #activateMenu{
+        display: block;
+    }
+    #mainMenu{
+        display: none;
+    }
+    #phoneMenuHidden{
+        display: block;
+    }
+}

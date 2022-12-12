@@ -1,0 +1,27 @@
+#container{
+    margin-top: 75px;
+    width: fit-content;
+    position: absolute;
+    height: fit-content;
+    left: 50%;
+    transform: translate(-50%, 0);
+    #chalanges{
+        display: inline-grid;
+        column-gap: 7px;
+        width: 100%;
+        grid-template-columns: auto auto auto;
+    }
+}
+
+
+@media screen and ( max-width: 1285px ){
+    #chalanges{
+        grid-template-columns: auto auto !important;
+    }
+}
+
+@media screen and ( max-width: 750px ){
+    #chalanges{
+        grid-template-columns: auto !important;
+    }
+}

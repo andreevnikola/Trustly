@@ -1,0 +1,26 @@
+<form #form="ngForm" (ngSubmit)="loginHandler(name.value, password.value)">
+    <h2>Влез в акаунт</h2>
+    <p>Потребителско име: </p>
+    <input (change)="nameOrPassErr = false" type="text" placeholder="Иван Иванов" #name="ngModel" ngModel name="name" required minlength="7">
+    <ng-container *ngIf="name.touched">
+        <p class="error" *ngIf="name.errors?.['required']">
+            Името е задъчлжително!
+        </p>
+        <p class="error" *ngIf="name.errors?.['minlength']">
+            Името трябва да е по-дълго от 6 знака!
+        </p>
+    </ng-container>
+    <p>Парола: </p>
+    <input (change)="nameOrPassErr = false" [type]="passwordType" placeholder="*********" #password="ngModel" ngModel name="password" required minlength="5"><br>
+    <span class="showPassword" (click)="passwordType === 'password' ? passwordType = 'text' : passwordType = 'password'">{{passwordType === 'password' ? 'покажи' : 'скрий'}} парола</span>
+    <ng-container *ngIf="password.touched">
+        <p class="error" *ngIf="password.errors?.['required']">
+            Паролата е задъчлжително!
+        </p>
+        <p class="error" *ngIf="password.errors?.['minlength']">
+            Паролата трябва да е по-дълго от 4 знака!
+        </p>
+    </ng-container>
+    <p class="error" *ngIf="nameOrPassErr">Сгрешено потребителско име или парола</p>
+    <button [disabled]="form.invalid">Влез</button>
+</form>

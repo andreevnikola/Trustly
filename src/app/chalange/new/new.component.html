@@ -1,0 +1,110 @@
+<div id="unActiveMail" *ngIf="!activated">
+    <p>За да споделите чалиндж, трябва да сте потвърдили e-mail адреса си!</p>
+    <button (click)="confirmMail()" class="confirmMail">Потвърди e-mail</button>
+</div>
+
+<form #form="ngForm" class="container" id="upload" *ngIf="activated" (ngSubmit)="uploadChalangeHandler(form)">
+    <div id="loading" *ngIf="loading">
+        <img src="assets/images/loading.gif" alt="loading">
+    </div>
+    <ng-container *ngIf="!loading">
+        <h1>Качи <strong>предизвикателството</strong> си!</h1>
+        <p>Заглавие: </p>
+        <input type="text" placeholder="Вихрен през януари и то ЧИСТО БОС!" name="title" [(ngModel)]="uploadData.title" #title="ngModel" required minlength="7">
+        <ng-container *ngIf="title.touched">
+            <p class="error" *ngIf="title.errors?.['required']">
+                Заглавието е задъчлжително!
+            </p>
+            <p class="error" *ngIf="title.errors?.['minlength']">
+                Заглавието трябва да е по-дълго от 6 знака!
+            </p>
+        </ng-container>
+        <p>Описание: </p>
+        <textarea name="description" [(ngModel)]="uploadData.description" #descriptionLocal="ngModel" required minlength="20" type="text" placeholder="За 2 дни трябва да кача **ВИХРЕН** и то <u>*чисто бос*</u>" (input)="descriptionChangedHandler($event)"></textarea>
+        <ng-container *ngIf="descriptionLocal.touched">
+            <p class="error" *ngIf="descriptionLocal.errors?.['required']">
+                Описанието е задъчлжително!
+            </p>
+            <p class="error" *ngIf="descriptionLocal.errors?.['minlength']">
+                Описанието трябва да е поне 20 знака!
+            </p>
+        </ng-container>
+        <div *ngIf="description" class="description_preview" markdown [data]="description"></div>
+        <p>Миниатюра: </p>
+        <button type="button" id="chooseImage"><label for="file" class="btn">Избери снимка</label></button>
+        <input style="display: none;" id="file" type="file" accept="image/*" name="image" id="file" #image="ngModel" ngModel (change)="fileChoosen($event)">
+        <div class="miniature" *ngIf="url">
+            <img [src]="url">
+        </div>
+        <p id="statusP">Развитие: </p>
+        <select id="chooseStatus" name="status" #status="ngModel" [(ngModel)]="uploadData.status">
+            <option value="планиран">Планиран 🟡</option>
+            <option value="започнат">Започнат 🟢</option>
+            <option value="завършен">Завършен 🏁</option>
+        </select>
+        <div id="content" *ngIf="status.value !== 'планиран'">
+            <br>
+            <hr>
+            <h2>Качате информация отностно {{status.value === 'започнат' ? 'завършената част на предизвикателството' : 'предизвикателството'}}</h2>
+            <div id="part" *ngFor="let part of parts; let i = index">
+                <div id="removeStep" (click)="parts.splice(parts.indexOf(i), 1); images.splice(i, 1); uploadData.steps.splice(i, 1)">x</div>
+                <h3>{{stepTitle.value ? stepTitle.value : 'Стъпка №'+(i+1)}}</h3>
+                <p>Заглавие: </p>
+                <input [name]="'titleStep'+i" [(ngModel)]="uploadData.steps[i].title" #titleStep="ngModel" required minlength="7" type="text" placeholder="До 5км надморска височина." #stepTitle="ngModel" ngModel [name]="'stepTitle'+i">
+                <ng-container *ngIf="title.touched">
+                    <p class="error" *ngIf="title.errors?.['required']">
+                        Заглавието е задъчлжително!
+                    </p>
+                    <p class="error" *ngIf="title.errors?.['minlength']">
+                        Заглавието трябва да е по-дълго от 6 знака!
+                    </p>
+                </ng-container>
+                <p>Събития и информация: </p>
+                <textarea [name]="'descriptionStep' + i" [(ngModel)]="uploadData.steps[i].description" #descriptionStep="ngModel" required minlength="20" type="text" placeholder="Пътят премина леко, като вечерта почти не спях. Гледките бяха чудесни, а хората - мили, както винаги. Улекнах с няколко стотачки на първата стълба над първата цепнатина, но нямаше други неочаквани плащания. На няколко пъти срещнах мечка в гората. По пътя се запознах с много и много интересни хора."></textarea>
+                <ng-container *ngIf="descriptionStep.touched">
+                    <p class="error" *ngIf="descriptionStep.errors?.['required']">
+                        Описанието е задъчлжително!
+                    </p>
+                    <p class="error" *ngIf="descriptionStep.errors?.['minlength']">
+                        Описанието трябва да е поне 20 знака!
+                    </p>
+                </ng-container>
+                <p>Снимки и видеа: </p>
+                <button type="button" id="chooseImage" *ngIf="!images || (images && !images[i])"><label [for]="'fileStep'+i" class="btn">Качи снимка или видео</label></button>
+                <input style="display: none;" id="file" type="file" accept="image/*, video/*" [name]="'fileStep' + i" [id]="'fileStep'+i" #image="ngModel" ngModel (change)="uploadImage($event, i)">
+                <div class="imagesContainer" *ngIf="images && images[i]">
+                    <ng-container *ngFor="let imageE of images[i]">
+                        <div id="removeStepImage" (click)="removeImageHandler(i, imageE)">x</div>
+                        <img *ngIf="imageE[1] == 'image'" [src]="imageE[0]">
+                        <video *ngIf="imageE[1] == 'video'" [src]="imageE[0]" controls></video>
+                    </ng-container>
+                    <button type="button" id="chooseImage"><label [for]="'fileStep'+i" class="btn">Качи снимка или видео</label></button>
+                </div>
+                <p>Начало на стъпката: </p>
+                <input type="text" placeholder="5 януари, 04:50ч, 2022г" [name]="'startStep'+i" [(ngModel)]="uploadData.steps[i].start" #startStep="ngModel" required pattern="([0-9]?)+[0-9]+ +[а-я]+, +[0-9]+[0-9]+:+[0-9]+[0-9]+ч+,+ +[0-9]+[0-9]+[0-9]+[0-9]+г+\.">
+                <ng-container *ngIf="startStep.touched">
+                    <p class="error" *ngIf="startStep.errors?.['required']">
+                        Времето на началото на стъпката е задължително!
+                    </p>
+                    <p class="error" *ngIf="startStep.errors?.['pattern']">
+                        Времето на началото на стъпката трябва да бъде във формат: (ден от месеца) (месец), (час):(мин)ч, (година)г. <br> Пример: 16 януари, 10:45ч, 2022г.
+                    </p>
+                </ng-container>
+                <p>Край на стъпката: </p>
+                <input type="text" placeholder="6 януари, 19:20ч, 2022г." [name]="'endStep'+i" [(ngModel)]="uploadData.steps[i].end" #endStep="ngModel" required pattern="([0-9]?)+[0-9]+ +[а-я]+, +[0-9]+[0-9]+:+[0-9]+[0-9]+ч+,+ +[0-9]+[0-9]+[0-9]+[0-9]+г+\.">
+                <ng-container *ngIf="endStep.touched">
+                    <p class="error" *ngIf="endStep.errors?.['required']">
+                        Времето на началото на стъпката е задължително!
+                    </p>
+                    <p class="error" *ngIf="endStep.errors?.['pattern']">
+                        Времето на началото на стъпката трябва да бъде във формат: (ден от месеца) (месец), (час):(мин)ч, (година)г. <br> Пример: 16 януари, 10:45ч, 2022г.
+                    </p>
+                </ng-container>
+            </div>
+            <br>
+            <button type="button" (click)="parts.push(parts[parts.length-1]+1); uploadData.steps.push({title: '',description: '',start: '',end: '', images: []})">ДОБАВИ СТЪПКА</button>
+        </div>
+        <button id="submit" type="submit" [disabled]="form.invalid">СПОДЕЛИ <img src="assets/svg/share-from-square-solid.svg" alt="сподели иконка"></button>
+    </ng-container>
+</form>
+<br><br>

@@ -1,0 +1,49 @@
+form{
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    padding: 40px;
+    border-radius: 15px;
+    border: 2px solid grey;
+    background: linear-gradient(45deg, #F2F2F3, #f7f7f7);
+
+    p{
+        margin-bottom: 2px;
+        max-width: 212px !important;
+    }
+    h2{
+        margin-top: -0px;
+        text-align: center;
+        font-size: 28px;
+    }
+    button{
+        margin-top: 15px;
+        cursor: pointer;
+        padding: 25px;
+        padding-top: 5px;
+        padding-bottom: 5px;
+        margin-left: 50%;
+        transform: translate(-50%, 0);
+    }
+    input{
+        width: 200px;
+        border-radius: 2px;
+        background-color: white;
+        border: 1px solid grey;
+        padding: 5px;
+    }
+    .showPassword{
+        position: relative;
+        top: -2px;
+        cursor: pointer;
+        color: rgb(76, 76, 218);
+    }
+    .showPassword:hover{
+        color: rgba(136, 88, 0, 0.897);
+    }
+    .error{
+        color: red;
+        margin-top: 0px;
+    }
+}
