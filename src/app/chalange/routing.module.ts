@@ -29,6 +29,10 @@ const routes: Routes = [
     {
         path: ':id',
         component: SpecificComponent
+    },
+    {
+        path: 'edit/:id',
+        component: NewComponent
     }
 ];
 

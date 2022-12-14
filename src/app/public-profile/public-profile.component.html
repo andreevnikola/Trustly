@@ -7,7 +7,7 @@
             <div id="stats" class="top_level_stats">
                 <div class="info">
                     <p class="number">{{chalanges_nmb}}</p>
-                    <p class="subinfo">цели</p>
+                    <p class="subinfo">чалинджа</p>
                 </div>
                 <div class="info">
                     <p class="number">{{subs}}</p>
@@ -51,7 +51,7 @@
         </div>
         <br>
         <div id="chalanges">
-            <app-preview-chalange *ngFor="let chalange of chalanges" [chalange]="chalange"></app-preview-chalange>
+            <app-preview-chalange [creator]="username" *ngFor="let chalange of chalanges" [chalange]="chalange" showName="false"></app-preview-chalange>
         </div>
     </ng-container>
     <!-- {{chalanges | json}} -->

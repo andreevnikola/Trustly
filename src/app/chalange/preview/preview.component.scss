@@ -83,6 +83,27 @@
         margin-left: 5px;
         background-color: white;
     }
+    #functions{
+        float: right;
+        margin-right: 5px;
+        margin-top: -5px;
+        img{
+            width: 15px;
+            height: 15px;
+        }
+        #delete{
+            background-color: rgba(224, 49, 49, 0.425);
+        }
+        button{
+            cursor: pointer;
+            margin-left: 2px;
+            border-radius: 5px;
+            border: 1px solid black;
+        }
+        button:hover{
+            filter: brightness(1.5);
+        }
+    }
 }
 
 

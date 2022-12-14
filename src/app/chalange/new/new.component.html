@@ -104,7 +104,7 @@
             <br>
             <button type="button" (click)="parts.push(parts[parts.length-1]+1); uploadData.steps.push({title: '',description: '',start: '',end: '', images: []})">ДОБАВИ СТЪПКА</button>
         </div>
-        <button id="submit" type="submit" [disabled]="form.invalid">СПОДЕЛИ <img src="assets/svg/share-from-square-solid.svg" alt="сподели иконка"></button>
+        <button id="submit" type="submit" [disabled]="form.invalid">{{id ? 'ПРОМЕНИ' : 'СПОДЕЛИ'}} <img src="assets/svg/share-from-square-solid.svg" alt="сподели иконка"></button>
     </ng-container>
 </form>
 <br><br>

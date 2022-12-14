@@ -14,7 +14,7 @@
                     <div id="stats" class="top_level_stats">
                         <div class="info">
                             <p class="number">{{chalanges_nmb}}</p>
-                            <p class="subinfo">цели</p>
+                            <p class="subinfo">чалинджа</p>
                         </div>
                         <div class="info">
                             <p class="number">{{subs}}</p>
@@ -71,16 +71,17 @@
             </div>
             <div id="comments" *ngIf="!(!comments || comments.length < 1)">
                 <div id="comment" *ngFor="let comment of comments; let i = index">
+                    <button id="delete" *ngIf="comment.commentator === myUserName" (click)="deleteCommentHandler(i)"><img src="assets/svg/trash-can-solid.svg" alt="delete"></button>
                     <a [routerLink]="'/profile/'+comment.commentator"><p class="commentator"><img [src]="comment.logo ? comment.logo : 'assets/images/avatar.png'" id="logo"> {{comment.commentator}}</p></a>
                     <img src="assets/images/arrow_connecting.png" id="showCommentator">
                     <p class="message">{{comment.message}}</p>
                     <p class="date_time">{{comment.time}}ч, {{comment.date}}</p>
-                    <button id="likeComment" [disabled]="!myUserName" (click)="!likedComments[i] ? likeCommentHandler(i) : likeCommentHandler(i)"><img [src]="!likedComments[i] ? 'assets/svg/heart-regular.svg' : 'assets/svg/heart-solid.svg'" alt="like comment"><span>5</span></button>
+                    <button id="likeComment" [disabled]="!myUserName" (click)="!likedComments.includes(comment._id) ? likeCommentHandler(i) : dislikeCommentHandler(i)"><img [src]="!likedComments.includes(comment._id) ? 'assets/svg/heart-regular.svg' : 'assets/svg/heart-solid.svg'" alt="like comment"><span><strong>{{comments[i].likers?.length || 0}}</strong></span></button>
                 </div>
             </div>
             <input #message type="text" id="comment_send" [disabled]="!myUserName" placeholder="Коментирайте">
-            <button class="reaction" [disabled]="!myUserName" (click)="sendCommentHandler(message.value)"><img src="assets/svg/paper-plane-solid.svg" alt="send comment"></button>
-            <button class="reaction" id="like" [style]="liked ? 'background: #8c93f5;' : 'background: white;'" (click)="!liked ? likeChalangeHandler() : dislikeChalangeHadnler()" [disabled]="!myUserName"><img src="assets/svg/thumbs-up-solid.svg" alt="like"><span>{{data.likes}}</span></button>
+            <button class="reaction" [disabled]="!myUserName" (click)="sendCommentHandler(message.value); message.value=''"><img src="assets/svg/paper-plane-solid.svg" alt="send comment"></button>
+            <button class="reaction" id="like" [style]="liked ? 'background: #8c93f5;' : 'background: white;'" (click)="!liked ? likeChalangeHandler() : dislikeChalangeHadnler()" [disabled]="!myUserName"><img src="assets/svg/thumbs-up-solid.svg" alt="like"><span>{{data.likes || 0}}</span></button>
         </div>
     </ng-container>
     <br><br>

@@ -60,7 +60,7 @@ export class SpecificComponent {
         this.liked = value.isLiked;
         this.comments = value.comments!;
         value.comments?.map((comment: any) => {
-          this.likedComments.push(comment.likers?.includes(this.myUserName) || false)
+          this.likedComments.push(comment.likers?.includes(this.myUserName) ? comment._id : null)
         });
         this.profileService.getDataAboutProfile(this.user?.name!, localStorage.getItem("key")).subscribe({
           next: (value: any) => {
@@ -138,6 +138,7 @@ export class SpecificComponent {
           alert(value.error);
           return;
         }
+        if(!this.likes){ this.likes = "0" }
         this.likes = (parseInt(this.likes) + 1).toString();
         this.liked = true;
         this.data.likes += 1;
@@ -178,11 +179,12 @@ export class SpecificComponent {
         const raw_date = new Date();
         const for_upload_date = raw_date.toLocaleDateString();
         const time = raw_date.toTimeString().slice(0, 5);
-        this.comments?.push({
+        this.comments?.unshift({
           commentator: localStorage.getItem('name'),
           message: message,
           date: for_upload_date,
-          time: time
+          time: time,
+          logo: localStorage.getItem('logo')
         });
       },
       error: (err) => {
@@ -193,18 +195,57 @@ export class SpecificComponent {
   }
 
   likeCommentHandler(index: number){
+    if( !localStorage.getItem("key") ){ return }
     this.chalangeService.likeComment(localStorage.getItem("key")!, this.comments![index]._id).subscribe({
       next: (value) => {
         if(value.error){
           alert(value.error);
           return;
         }
-        //TODO REALTIME LIKE UPDATE
+        this.likedComments.push(this.comments![index]._id);
+        if(!this.comments![index].likers){ this.comments![index].likers = [] }
+        this.comments![index].likers.push(this.comments![index].likers.indexOf(this.myUserName));
       },
       error: (err) => {
         console.error(err);
         (err);
         alert("Нещо се обърка! Опитайте пак по-късно!");
+      }
+    });
+  }
+
+  dislikeCommentHandler(index: number){
+    if( !localStorage.getItem("key") ){ return }
+    this.chalangeService.dislikeComment(localStorage.getItem("key")!, this.comments![index]._id).subscribe({
+      next: (value) => {
+        if(value.error){
+          alert(value.error);
+          return;
+        }
+        this.likedComments.splice(this.comments![index]._id);
+        this.comments![index].likers.splice(this.comments![index].likers.indexOf(this.myUserName), 1);
+      },
+      error: (err) => {
+        console.error(err);
+        (err);
+        alert("Нещо се обърка! Опитайте пак по-късно!");
+      }
+    });
+  }
+
+  deleteCommentHandler(index: number){
+    let comment = this.comments![index]._id;
+    this.chalangeService.deleteComment(localStorage.getItem('key')!, comment).subscribe({
+      next: (value) => {
+        if(value.error){
+          alert(value.error);
+          return;
+        }
+        this.comments!.splice(index, 1);
+      },
+      error: (err) => {
+        console.error(err);
+        alert('Нещо се обърка! Опитайте пак по-късно!')
       }
     });
   }

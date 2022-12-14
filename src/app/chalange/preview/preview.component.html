@@ -1,10 +1,14 @@
-<div id="chalange" (click)="maximizeChalangeHandler()">
+<div *ngIf="chalange" id="chalange" (click)="maximizeChalangeHandler()">
     <p class="status" [style]="chalange.status=='завършен' ? 'color: black;' : chalange.status=='започнат' ? 'color: yellow; text-shadow: 1px 1px 1px black' : 'color: green'">{{chalange.status}} <strong>{{chalange.status=='завършен' ? '🏁' : chalange.status=='започнат' ? '🟡' : '🟢'}}</strong></p>
-    <p class="creator" *ngIf="creator?.name">{{creator.name}}</p>
+    <p class="creator" *ngIf="creator?.name && showName">{{creator.name}}</p>
     <p class="likes">{{chalange.likes ? chalange.likes : 0}} <img src="assets/svg/thumbs-up-solid.svg" alt="likes"></p>
     <img *ngIf="creator?.logo" [src]="creator.logo" alt="creator logo" id="logo">
-    <img [src]="chalange.thumnail" alt="thumnail" id="main_img">
+    <img [src]="chalange.thumnail || 'assets/images/placeholder-16_9.png'" alt="thumnail" id="main_img">
     <p class="title">{{chalange.title}}</p>
     <p class="date">{{chalange.date}}</p>
+    <div id="functions" *ngIf="creator === myUserName">
+        <a [routerLink]="'/edit/'+chalange._id"><button id="edit"><img src="assets/svg/edit.svg" alt="edit"></button></a>
+        <button id="delete" (click)="deleteChalangeHandler()"><img src="assets/svg/trash-can-solid.svg" alt="delete"></button>
+    </div>
     <div class="description" markdown [data]="chalange.description"></div>
 </div>

@@ -332,6 +332,17 @@
                 font-size: 16px;
             }
         }
+        #delete{
+            float: right;
+            border-radius: 0;
+            border: 0;
+            padding: 5px;
+            margin-top: 1px;
+            border-radius: 5px;
+            background-color: rgba(224, 49, 49, 0.425);
+            padding-bottom: 2px;
+            border: 1px solid grey;
+        }
     }
 }
 
