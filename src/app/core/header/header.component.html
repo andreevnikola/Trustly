@@ -2,9 +2,12 @@
 	<nav id="mainMenu">
 		<a routerLink="/" id="withImage"><img src="assets/images/logo_without_bg.png" alt=""></a>
 		<a routerLink="/">Начало</a>
-		<a routerLink="chalange/active">Активни</a>
 		<a routerLink="chalange/followed">Следвани</a>
 		<a routerLink="chalange/upload">Сподели</a>
+		<span id="seracher">
+			<button (click)="searchHanfler(input.value)"><img src="assets/svg/magnifying-glass-solid.svg" alt="search"></button>
+			<input type="search" placeholder="Търси" #input>
+		</span>
 		<ng-container *ngIf="!authService.loged">
 			<a routerLink="auth/join" class="auth">Приседини се</a>
 			<a routerLink="auth/login" class="auth">Влез</a>
@@ -17,9 +20,12 @@
 	<button id="activateMenu" (click)="showMobileMenu()"><img [ngClass]="{'rotated': mobileMenuShown}" style="transition: 0.25s;" height="35px" src="assets/svg/bars-solid.svg" alt="menu"></button>
 	<div id="phoneMenuHidden" *ngIf="!mobileMenuShown"><a routerLink="/"><img src="assets/images/logo_without_bg.png" alt=""></a></div>
 	<nav id="phoneMenu" *ngIf="mobileMenuShown" [@menu_animation]>
-		<a (click)="mobileMenuShown = false" routerLink="/" id="withImageMobile"><img src="assets/images/logo_without_bg.png" alt=""></a><br>
+		<span id="seracher_mobile">
+			<button (click)="searchHanfler(inputMobile.value)"><img src="assets/svg/magnifying-glass-solid.svg" alt="search"></button>
+			<input type="search" placeholder="Търси" #inputMobile>
+		</span><hr>
+		<a (click)="mobileMenuShown = false" routerLink="/" id="withImageMobile"><img src="assets/images/logo_without_bg.png" alt=""></a>
 		<a (click)="mobileMenuShown = false" routerLink="/">Начало</a><hr>
-		<a (click)="mobileMenuShown = false" routerLink="chalange/active">Активни</a><hr>
 		<a (click)="mobileMenuShown = false" routerLink="chalange/followed">Следвани</a><hr>
 		<a (click)="mobileMenuShown = false" routerLink="chalange/upload">Сподели</a><hr>
 		<ng-container *ngIf="!authService.loged">

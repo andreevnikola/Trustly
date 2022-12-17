@@ -18,7 +18,7 @@ async function comment(req, res){
         const for_upload_date = raw_date.toLocaleDateString();
         const time = raw_date.toTimeString().slice(0, 5);
         const sort_time = raw_date.getTime();
-        db.Create({
+        let ret = await db.Create({
             commentator: commentator,
             chalange: chalange,
             message: message,
@@ -28,6 +28,7 @@ async function comment(req, res){
         });
         res.send({
             error: false,
+            id: ret.insertedId
         });
     } catch (error) {
         console.log(error);

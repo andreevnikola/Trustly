@@ -5,11 +5,39 @@
     height: fit-content;
     left: 50%;
     transform: translate(-50%, 0);
-    #chalanges{
-        display: inline-grid;
+    #userProfiles{
+        display: grid;
         column-gap: 7px;
         width: 100%;
-        grid-template-columns: auto auto auto;
+        grid-template-columns: auto auto auto; 
+        padding-bottom: 5px;
+        margin-bottom: 10px;
+        *{
+            display: flex;
+            page-break-inside: avoid; /* Firefox is dumb */
+            break-inside: avoid;
+        } 
+    }
+    #chalanges{
+        display: grid;
+        column-gap: 7px;
+        width: 100%;
+        grid-template-columns: auto auto auto; 
+        *{
+            display: flex;
+            page-break-inside: avoid; /* Firefox is dumb */
+            break-inside: avoid;
+        }
+    }
+    #notFoundAnyResults{
+        text-align: center;
+        font-size: 20px;
+        position: absolute;
+        min-width: 280px;
+        width: fit-content;
+        max-width: 80vw;
+        transform: translate(-50%, 0);
+        text-shadow: 1px 1px 0px rgba(255, 0, 0, 0.226);
     }
 }
 
@@ -18,10 +46,16 @@
     #chalanges{
         grid-template-columns: auto auto !important;
     }
+    #userProfiles{
+        grid-template-columns: auto auto !important;
+    }
 }
 
 @media screen and ( max-width: 750px ){
     #chalanges{
+        grid-template-columns: auto !important;
+    }
+    #userProfiles{
         grid-template-columns: auto !important;
     }
 }

@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { ProfileService } from '../profile.service';
 
 @Component({
@@ -7,7 +7,7 @@ import { ProfileService } from '../profile.service';
   templateUrl: './public-profile.component.html',
   styleUrls: ['./public-profile.component.scss']
 })
-export class PublicProfileComponent {
+export class PublicProfileComponent implements OnInit{
 
   profileIcon: string = "";
   username: string | undefined = "";
@@ -23,7 +23,18 @@ export class PublicProfileComponent {
   subscribed: boolean = false;
   loading: boolean = true;
 
-  constructor( private profileService: ProfileService, private route: ActivatedRoute, private router: Router ) {
+  constructor( private profileService: ProfileService, private route: ActivatedRoute, private router: Router ) { }
+
+  ngOnInit(): void {
+    this.getData();
+    this.router.events.subscribe((event: any) => {
+        if (event instanceof NavigationEnd) {
+            this.getData();
+        }
+    });
+  }
+
+  getData(){
     this.profileService.getDataAboutProfile(this.route.snapshot.paramMap.get('name')!, localStorage.getItem("key")!).subscribe({
       next: (value) => {
         this.username = value.name!;
@@ -49,7 +60,7 @@ export class PublicProfileComponent {
         });
       },
       error: (err) => {
-        router.navigate(['/']);
+        this.router.navigate(['/']);
       }
     });
   }

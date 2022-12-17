@@ -18,7 +18,7 @@ async function getProfileData(req, res){
                     isSubscribed = true;
                     return;
                 }
-            }) || null;
+            });
         }
         let chalanges = [];
         if(ret.chalanges){

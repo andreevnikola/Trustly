@@ -1,8 +1,21 @@
 <div id="container">
     <img src="assets/images/loading.gif" alt="loading" *ngIf="loading" id="loading">
     <ng-container *ngIf="!loading">
+        <div id="userProfiles" *ngIf="profiles && profiles.length > 0" [style]="data.length > 0 ? 'border-bottom: 2px solid grey;' : ''">
+            <app-preview-profile *ngFor="let profile of profiles" [user]="profile"></app-preview-profile>
+        </div>
         <div id="chalanges">
-            <h1 *ngIf="data.length < 1 || !data">Нямам качени ЧАЛИНДЖИ! Не се срамувай бъди първи! <a routerLink="chalange/upload">Кликни ТУК</a></h1>
+            <h1 *ngIf="(data.length < 1 || !data) && (profiles.length < 1 || !profiles)" id="notFoundAnyResults">
+                <ng-container *ngIf="!isFollowing && !search">
+                    Няма качени ЧАЛИНДЖИ! Не се срамувай бъди първи! <a routerLink="chalange/upload">Кликни ТУК</a>
+                </ng-container>
+                <ng-container *ngIf="!isFollowing && search">
+                    Няма намерени резултати! :(
+                </ng-container>
+                <ng-container *ngIf="isFollowing && !search">
+                    Вашия профил не е харесал (последвал) нито един чалиндж!
+                </ng-container>
+            </h1>
             <app-preview-chalange id="chalange" *ngFor="let chalange of data; let i = index" [chalange]="chalange" [creator]="creators[i]"></app-preview-chalange>
         </div>
     </ng-container>

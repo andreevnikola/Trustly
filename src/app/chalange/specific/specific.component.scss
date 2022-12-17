@@ -142,19 +142,20 @@
     left: 50%;
     transform: translate(-50%, 0);
     border-radius: 15px;
-    input{
+    textarea{
         padding-left: 10px;
-        padding-right: 50px;
+        padding-right: 40px;
         font-size: 18px;
         padding-top: 5px;
         padding-bottom: 5px;
-        width: calc(100% + -115px);
+        width: calc(100% + -157px);
         border-radius: 15px;
         border: 1px solid black;
         margin-top: 10px;
+        resize: none;
     }
     button{
-        margin-left: -40px;
+        margin-left: -38px;
         border-radius: 50%;
         cursor: pointer;
         background-color: white;
@@ -162,7 +163,7 @@
         padding-right: 10px;
         padding-top: 4px;
         position: relative;
-        bottom: -1px;
+        top: -10px;
         img{
             width: 15px;
             height: 15px;
@@ -172,13 +173,32 @@
         cursor: not-allowed;
         filter: contrast(0.3);
     }
-    #like{
-        border-radius: 15px;
+    #dislike{
+        top: -8px;
+        margin-left: 2px;
+        padding-left: 2px;
+        padding-top: 1px;
+        padding-bottom: 1px;
+        color: red;
+        font-weight: bold;
+        img{
+            width: 24px;
+            height: 24px;
+        }
+        span{
+            height: 24px;
+            margin-top: -1px;
+            margin-left: 0px;
+            margin-left: 1px;
+        }
+    }
+    .like{
+        border-radius: 12px;
         padding-right: 5px;
         padding-top: 4px;
         padding-left: 7px;
         padding-bottom: 4px;
-        margin-left: 10px;
+        margin-left: 7px;
         width: 50px;
         text-align: left;
         img{
@@ -191,8 +211,8 @@
             font-size: 20px;
             margin-left: 5px;
             position: absolute;
-            border-top-right-radius: 15px;
-            border-bottom-right-radius: 15px;
+            border-top-right-radius: 12px;
+            border-bottom-right-radius: 12px;
             padding-right: 7px;
             height: 25px;
             margin-top: -4px;
@@ -252,6 +272,14 @@
         .title{
             font-size: 22px;
         }
+        .diapasone{
+            margin-top: 5px;
+            font-size: 12px;
+        }
+        #end{
+            margin-top: -15px;
+            float: right;
+        }
         #images{
             width: 100%;
             display: grid;
@@ -307,6 +335,8 @@
             float: right;
             margin-right: 0px;
             font-size: 12px;
+            position: relative;
+            bottom: -10px;
         }
         .message{
             margin-left: 5px;
@@ -322,10 +352,12 @@
         }
         #likeComment{
             float: right;
+            position: relative;
+            background-color: transparent;
             border-radius: 0;
             border: 0;
             margin-right: 2px;
-            margin-top: -5px;
+            top: 5px !important;
             span{
                 position: relative;
                 top: -1px;
@@ -337,7 +369,7 @@
             border-radius: 0;
             border: 0;
             padding: 5px;
-            margin-top: 1px;
+            margin-top: 5px;
             border-radius: 5px;
             background-color: rgba(224, 49, 49, 0.425);
             padding-bottom: 2px;

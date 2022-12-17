@@ -1,0 +1,9 @@
+<div id="profile" (click)="openProfileHandler()">
+    <img [src]="user.logo || 'assets/images/avatar.png'" alt="user logo" id="logo">
+    <p class="name">{{user.name}}</p>
+    <div id="profileData">
+        <p class="data" id="likes">{{user.likes ? user.likes : 0}} <img src="assets/svg/thumbs-up-solid.svg" alt="likes"></p>
+        <p class="data" id="chalanges">{{user.chalanges ? user.chalanges.length : 0}} <img src="assets/svg/newspaper-solid.svg" alt="likes"></p>
+        <p class="data" id="subs"><strong>{{user.subscribers ? user.subscribers.length : 0}}</strong><img src="assets/images/subs.png" alt="абоната"></p>
+    </div>
+</div>

@@ -6,8 +6,8 @@ nav{
     background: #F2F2F3;
     width: calc(100% - 160px);
     padding-bottom: 15px;
+    height: 23px !important;
     z-index: 2;
-
     a{
         margin-right: 15px;
         text-decoration: none;
@@ -32,13 +32,33 @@ nav{
     img{
         max-width: 150px;
     }
+    #seracher{
+        position: relative;
+        margin-left: 0px;
+        flex-grow: 1;
+        width: fit-content;
+        height: 5px;
+        z-index: 20;
+        transform: translate(0, 0);
+        input{
+            width: calc(100% + -588px);
+            position: relative;
+            height: 24.5px;
+            top: -1.5px;
+        }
+        button{
+            padding-top: 3px;
+            img{
+                height:13px;
+            }
+        }
+    }
 }
 
 #phoneMenu{
     width: 100% !important;
     position: fixed;
     top: 0;
-    z-index: 10;
     padding-top: 5px;
     margin-left: 0px;
     background: #F2F2F3;
@@ -46,6 +66,33 @@ nav{
     padding-bottom: 15px;
     display: none;
     text-align: center;
+    border-bottom: 2px solid grey;
+    box-shadow: 2px 5px 10px rgba(78, 50, 50, 0.219);
+    height: fit-content !important;
+    #seracher_mobile{
+        position: relative;
+        width: fit-content;
+        top: 2px;
+        margin: 0;
+        margin-left: 73px;
+        margin-bottom: 0px;
+        z-index: 10;
+        input{
+            width: calc(100% + -244px);
+            height: 41px;
+            transform: translate(20px, 0);
+            margin: 0;
+        }
+        button{
+            transform: translate(-25px, 0);
+            position: absolute;
+            margin: 0;
+            padding-top: 3px;
+            img{
+                height:30px;
+            }
+        }
+    }
 }
 
 #withImageMobile{
@@ -116,5 +163,14 @@ nav{
     }
     #phoneMenuHidden{
         display: block;
+    }
+}
+
+@media screen and (min-width: 1200px) {
+    #seracher{
+        margin-left: 85px !important;
+        input{
+            width: calc(100% + -718px) !important;
+        }
     }
 }

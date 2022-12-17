@@ -35,4 +35,9 @@ export class HeaderComponent {
     this.mobileMenuShown = !this.mobileMenuShown;
   }
 
+  searchHanfler(input: string){
+    this.router.navigate(['/search/'+input]);
+    this.mobileMenuShown = false;
+  }
+
 }

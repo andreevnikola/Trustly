@@ -25,7 +25,7 @@ class CRUD{
         this.result = await this.connection.findOne(condition);
         return this.result;
     }
-    async ReadMany(condition, limit, sort){
+    async ReadMany(condition, limit, sort, limit_after_sort){
         if(limit){
             if(sort){
                 this.result = await this.connection?.find(condition).limit(limit).sort(sort).toArray();
@@ -34,7 +34,11 @@ class CRUD{
             }
         }else{
             if(sort){
-                this.result = await this.connection?.find(condition).sort(sort).toArray();
+                if(limit_after_sort){
+                    this.result = await this.connection?.find(condition).sort(sort).limit(limit_after_sort).toArray();
+                }else{
+                    this.result = await this.connection?.find(condition).sort(sort).toArray();
+                }
             }else{
                 this.result = await this.connection?.find(condition).toArray();
             }
@@ -49,6 +53,10 @@ class CRUD{
         this.result = await this.connection?.deleteOne(condition);
         return this.result;
     }
+    // async Aggregate(data){
+    //     this.result = await this.connection?.aggregate(data);
+    //     return this.result;
+    // }
     async Close(){
         await client.close();
     }

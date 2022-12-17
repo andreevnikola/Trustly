@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Component, OnInit  } from '@angular/core';
+import { ActivatedRoute, Router, Event, RouterEvent, NavigationEnd } from '@angular/router';
 import { ProfileService } from 'src/app/profile.service';
 import { IUser } from 'src/app/shared/interfaces';
 import { ChalangeService } from '../chalange.service';
@@ -25,7 +25,7 @@ import {
     ])
   ]
 })
-export class SpecificComponent {
+export class SpecificComponent implements OnInit{
 
   id: string | null = "";
   data: any;
@@ -44,10 +44,18 @@ export class SpecificComponent {
   profile_id: string = "";
   maximizedImage: string[] | false = false;
   liked: boolean = false;
+  disliked: boolean = false;
   comments: any[] | undefined;
   likedComments: any[] = [];
+  commentInputHeight = "22px";
 
-  constructor( private route: ActivatedRoute, private chalangeService: ChalangeService, public router: Router, private profileService: ProfileService ) {
+  constructor( private route: ActivatedRoute, private chalangeService: ChalangeService, public router: Router, private profileService: ProfileService ) { }
+
+  ngOnInit(): void {
+    this.getData();
+  }
+
+  getData(){
     this.id = this.route.snapshot.paramMap.get('id');
     this.chalangeService.getChalangeById(this.id!, localStorage.getItem('key')).subscribe({
       next: (value: any) => {
@@ -58,6 +66,7 @@ export class SpecificComponent {
         this.data = value.chalange;
         this.user = value.creator;
         this.liked = value.isLiked;
+        this.disliked = value.isDisLiked;
         this.comments = value.comments!;
         value.comments?.map((comment: any) => {
           this.likedComments.push(comment.likers?.includes(this.myUserName) ? comment._id : null)
@@ -77,7 +86,7 @@ export class SpecificComponent {
             this.loading = false;
           },
           error: (err) => {
-            router.navigate(['/']);
+            this.router.navigate(['/']);
           }
         });
       },
@@ -132,6 +141,9 @@ export class SpecificComponent {
 
   likeChalangeHandler(){
     if(!this.myUserName){ return }
+    if(this.disliked){
+      this.undodislikeChalangeHadnler();
+    }
     this.chalangeService.likeChalange(localStorage.getItem("key")!, this.profile_id!, this.id!).subscribe({
       next: (value: any) => {
         if(value.error){
@@ -149,8 +161,8 @@ export class SpecificComponent {
     });
   }
 
-  dislikeChalangeHadnler(){
-    this.chalangeService.dislikeChalange(localStorage.getItem("key")!, this.profile_id!, this.id!).subscribe({
+  undolikeChalangeHadnler(){
+    this.chalangeService.undolikeChalange(localStorage.getItem("key")!, this.profile_id!, this.id!).subscribe({
       next: (value: any) => {
         if(value.error){
           alert(value.error);
@@ -166,10 +178,47 @@ export class SpecificComponent {
     });
   }
 
+  dislikeChalangeHandler(){
+    if(!this.myUserName){ return }
+    if(this.liked){
+      this.undolikeChalangeHadnler();
+    }
+    this.chalangeService.dislikeChalange(localStorage.getItem("key")!, this.profile_id!, this.id!).subscribe({
+      next: (value: any) => {
+        if(value.error){
+          alert(value.error);
+          return;
+        }
+        if(!this.data.dislikes){ this.data.dislikes = 0 }
+        this.disliked = true;
+        this.data.dislikes += 1;
+      },
+      error: (err: any) => {
+        alert("Нещо се обърка! Опитайте пак по-късно!")
+      }
+    });
+  }
+
+  undodislikeChalangeHadnler(){
+    this.chalangeService.undodislikeChalange(localStorage.getItem("key")!, this.profile_id!, this.id!).subscribe({
+      next: (value: any) => {
+        if(value.error){
+          alert(value.error);
+          return;
+        }
+        this.disliked = false;
+        this.data.dislikes -= 1;
+      },
+      error: (err) => {
+        alert("Нещо се обърка! Опитайте пак по-късно!")
+      }
+    });
+  }
+
   sendCommentHandler(message: string){
     if(!localStorage.getItem('key')){ return; }
     this.chalangeService.sendComment(localStorage.getItem('key')!, message, this.id!).subscribe({
-      next: (value) => {
+      next: (value: any) => {
         if(value.error){
           console.log(value.error)
           alert("В акаунта ви се случило ново влизане! Влезте в аканунта си отонво!");
@@ -184,7 +233,8 @@ export class SpecificComponent {
           message: message,
           date: for_upload_date,
           time: time,
-          logo: localStorage.getItem('logo')
+          logo: localStorage.getItem('logo'),
+          _id: value.id
         });
       },
       error: (err) => {
@@ -222,7 +272,7 @@ export class SpecificComponent {
           alert(value.error);
           return;
         }
-        this.likedComments.splice(this.comments![index]._id);
+        this.likedComments.splice(index, 1);
         this.comments![index].likers.splice(this.comments![index].likers.indexOf(this.myUserName), 1);
       },
       error: (err) => {
@@ -248,6 +298,11 @@ export class SpecificComponent {
         alert('Нещо се обърка! Опитайте пак по-късно!')
       }
     });
+  }
+
+  commentInputChanged(input: HTMLElement){
+    input.style.height = "0px";
+    input.style.height = (input.scrollHeight - 10) + "px";
   }
 
 }

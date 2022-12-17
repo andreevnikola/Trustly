@@ -20,7 +20,6 @@ async function deleteChalange(req, res){
         }
         for(let i = 0; i < data.steps.length; i++){
             for(let k = 0; k < data.steps[i].images?.length; k++){
-                console.log(data.steps[i].images[k])
                 cloudinary.uploader.destroy(data.steps[i].images[k]);
             }
         }
@@ -30,6 +29,9 @@ async function deleteChalange(req, res){
         }, {
             $pull: {
                 chalanges: chalange
+            },
+            $inc: {
+                likes: -(data.likes)
             }
         });
         res.send({

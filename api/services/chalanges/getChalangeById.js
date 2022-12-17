@@ -23,9 +23,15 @@ async function getChalangeById(req, res){
                 });
             }
             var isLiked = false;
+            var isDisLiked = false;
             myUser.liking?.map((like) => {
                 if(like?.equals(ret._id)){
                     isLiked = true;
+                }
+            });
+            myUser.disliking?.map((dislike) => {
+                if(dislike?.equals(ret._id)){
+                    isDisLiked = true;
                 }
             });
         }
@@ -55,6 +61,7 @@ async function getChalangeById(req, res){
             chalange: ret,
             comments: comments,
             isLiked: isLiked,
+            isDisLiked: isDisLiked,
             creator: {
                 name: user.name,
                 mail: user.mail,

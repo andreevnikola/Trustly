@@ -84,7 +84,8 @@ async function Upload(req, res) {
             steps: readyForUploadSteps,
             time: time,
             date: for_upload_date,
-            sorting_time: sort_time
+            sorting_time: sort_time,
+            last_updated: sort_time
         });
     }else{
         result = await db.Create({
@@ -95,7 +96,8 @@ async function Upload(req, res) {
             status: status,
             time: time,
             date: for_upload_date,
-            sorting_time: sort_time
+            sorting_time: sort_time,
+            last_updated: sort_time
         });
     }
     await users.Update({

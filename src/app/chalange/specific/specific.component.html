@@ -14,7 +14,7 @@
                     <div id="stats" class="top_level_stats">
                         <div class="info">
                             <p class="number">{{chalanges_nmb}}</p>
-                            <p class="subinfo">чалинджа</p>
+                            <p class="subinfo">chalange</p>
                         </div>
                         <div class="info">
                             <p class="number">{{subs}}</p>
@@ -55,7 +55,7 @@
         <br>
         <div id="mainData">
             <p class="title">{{data.title}}</p>
-            <img [src]="data.thumnail" alt="thumnail" id="thumnail">
+            <img [src]="data.thumnail || 'assets/images/placeholder-16_9.png'" alt="thumnail" id="thumnail">
             <div class="description" markdown [data]="data.description"></div>
             <p class="status" [style]="data.status=='завършен' ? 'color: black;' : data.status=='започнат' ? 'color: yellow; text-shadow: 1px 1px 1px black' : 'color: green'">{{data.status}} <strong>{{data.status=='завършен' ? '🏁' : data.status=='започнат' ? '🟡' : '🟢'}}</strong></p>
             <br><br>
@@ -68,6 +68,8 @@
                     </ng-container>
                 </div>
                 <p class="description">{{step.description}}</p>
+                <p class="diapasone">{{step.start}}</p>
+                <p class="diapasone" id="end">{{step.end}}</p>
             </div>
             <div id="comments" *ngIf="!(!comments || comments.length < 1)">
                 <div id="comment" *ngFor="let comment of comments; let i = index">
@@ -79,9 +81,10 @@
                     <button id="likeComment" [disabled]="!myUserName" (click)="!likedComments.includes(comment._id) ? likeCommentHandler(i) : dislikeCommentHandler(i)"><img [src]="!likedComments.includes(comment._id) ? 'assets/svg/heart-regular.svg' : 'assets/svg/heart-solid.svg'" alt="like comment"><span><strong>{{comments[i].likers?.length || 0}}</strong></span></button>
                 </div>
             </div>
-            <input #message type="text" id="comment_send" [disabled]="!myUserName" placeholder="Коментирайте">
+            <textarea (input)="commentInputChanged(message)" [style]="'height: ' + commentInputHeight" #message type="text" id="comment_send" [disabled]="!myUserName" placeholder="Коментирайте"></textarea>
             <button class="reaction" [disabled]="!myUserName" (click)="sendCommentHandler(message.value); message.value=''"><img src="assets/svg/paper-plane-solid.svg" alt="send comment"></button>
-            <button class="reaction" id="like" [style]="liked ? 'background: #8c93f5;' : 'background: white;'" (click)="!liked ? likeChalangeHandler() : dislikeChalangeHadnler()" [disabled]="!myUserName"><img src="assets/svg/thumbs-up-solid.svg" alt="like"><span>{{data.likes || 0}}</span></button>
+            <button class="reaction" class="like" [style]="liked ? 'background: #8c93f5;' : 'background: white;'" (click)="!liked ? likeChalangeHandler() : undolikeChalangeHadnler()" [disabled]="!myUserName"><img src="assets/svg/thumbs-up-solid.svg" alt="like"><span>{{data.likes || 0}}</span></button>
+            <button class="reaction" id="dislike" class="like" [style]="disliked ? 'background: #8c93f5;' : 'background: white;'" (click)="!disliked ? dislikeChalangeHandler() : undodislikeChalangeHadnler()" [disabled]="!myUserName"><img src="assets/images/fail.png" alt="like"><span>{{data.dislikes || 0}}</span></button>
         </div>
     </ng-container>
     <br><br>

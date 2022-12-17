@@ -16,16 +16,16 @@ import { ChalangeModule } from './chalange/chalange.module';
   declarations: [
     AppComponent,
     MainComponent,
-    PublicProfileComponent
+    PublicProfileComponent,
   ],
   imports: [
+    ChalangeModule,
     BrowserModule,
     AppRoutingModule,
     CoreModule,
     SharedModule,
     HttpClientModule,
     CommonModule,
-    ChalangeModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -67,6 +67,8 @@ async function Edit(req, res) {
         }
     }
 
+    const timeIs = (new Date()).getTime();
+
     if(steps){
         let og = await db.Read({ _id: id });
         let readyForUploadSteps = [];
@@ -113,6 +115,7 @@ async function Edit(req, res) {
                 thumnail: thumnail,
                 status: status,
                 steps: readyForUploadSteps,
+                last_updated: timeIs
             }
         });
     }else{
@@ -125,6 +128,7 @@ async function Edit(req, res) {
                 description: description,
                 thumnail: thumnail,
                 status: status,
+                last_updated: timeIs
             }
         });
     }

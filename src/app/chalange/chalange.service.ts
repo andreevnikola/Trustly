@@ -76,7 +76,13 @@ export class ChalangeService {
     return this.httpClient.get<any>(`http://localhost:8080/api/chalanges/getbyid/${id}/${key}`);
   }
 
-  getChalanges(){
+  getChalanges(isFollowing: boolean, key?: string | null, search?: null | string){
+    if(search){
+      return this.httpClient.get<IError>(`http://localhost:8080/api/chalanges/search/${search!}`);
+    }
+    if(isFollowing){
+      return this.httpClient.get<IError>(`http://localhost:8080/api/chalanges/following/${key!}`);
+    }
     return this.httpClient.get<IError>(`http://localhost:8080/api/chalanges/all`);
   }
 
@@ -93,6 +99,14 @@ export class ChalangeService {
   }
 
   dislikeChalange( liker: string, liked: string, chalange: string ){
+    return this.httpClient.get<IError>(`http://localhost:8080/api/chalanges/will_fail/${liker}/${liked}/${chalange}`);
+  }
+
+  undodislikeChalange( liker: string, liked: string, chalange: string ){
+    return this.httpClient.get<IError>(`http://localhost:8080/api/chalanges/undo_will_fail/${liker}/${liked}/${chalange}`);
+  }
+
+  undolikeChalange( liker: string, liked: string, chalange: string ){
     return this.httpClient.get<IError>(`http://localhost:8080/api/chalanges/dislike/${liker}/${liked}/${chalange}`);
   }
 
