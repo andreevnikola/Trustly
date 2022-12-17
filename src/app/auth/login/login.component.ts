@@ -32,6 +32,7 @@ export class LoginComponent {
           localStorage.setItem("logo_id", value.logo_id!)
         }
         this.authService.loged = true;
+        this.authService.name = value.name!;
         this.router.navigate(['/profile/'+value.name!]);
       },
       error: (err) => {

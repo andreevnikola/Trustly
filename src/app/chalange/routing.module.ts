@@ -20,6 +20,7 @@ const routes: Routes = [
     },
     {
         path: 'followed',
+        canActivate: [AuthGuard],
         component: FollowedComponent
     },
     {

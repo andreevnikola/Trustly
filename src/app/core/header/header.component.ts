@@ -23,9 +23,8 @@ import {
 export class HeaderComponent {
 
   mobileMenuShown: boolean = false;
-  name: string | null = localStorage.getItem("name");
 
-  constructor( public router: Router, public authService: AuthService ) {}
+  constructor( public router: Router, public authService: AuthService ) {  }
 
   logoutHandler(){
     this.authService.logoutUser();

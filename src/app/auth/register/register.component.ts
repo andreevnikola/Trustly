@@ -24,6 +24,7 @@ export class RegisterComponent {
         localStorage.setItem("name", value.name!);
         localStorage.setItem("mail", value.mail!);
         localStorage.setItem("key", value.key!);
+        this.authService.name = value.name!;
         this.authService.loged = true;
         this.router.navigate(['/']);
       },

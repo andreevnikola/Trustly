@@ -2,7 +2,7 @@
     <img src="assets/images/loading.gif" alt="loading" *ngIf="loading" id="loading">
     <ng-container *ngIf="!loading">
         <div id="top">
-            <a [routerLink]="'/profile/'+username"><img id="logo" [src]="profileIcon" alt="иконката на потребителя"></a>
+            <a [routerLink]="'/profile/'+username"><img id="logo" [src]="profileIcon ? profileIcon : 'assets/images/avatar.png'" alt="иконката на потребителя"></a>
             <div [ngClass]="{'notYourAcc': !(username === myUserName)}">
                 <a [routerLink]="'/profile/'+username"><p class="name">{{username}}</p></a>
                 <p class="mail">{{user_mail}}</p>

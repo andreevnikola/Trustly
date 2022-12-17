@@ -5,8 +5,6 @@ async function checkMail(req, res){
     try {
         let { name, mail } = req.params;
 
-        json.mails.splice(json.mails.indexOf(mail), 1);
-
         let key = Math.floor(Math.random() * 999999999) + 1;
 
         let json = JSON.parse(fs.readFileSync('./globalData.json'));

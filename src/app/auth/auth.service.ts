@@ -8,6 +8,7 @@ import { IUser, IError, IEdit } from '../shared/interfaces';
 export class AuthService {
 
   loged: boolean = false;
+  name: string | null = localStorage.getItem('name');
 
   get isLoged(){
     return localStorage.getItem("name");

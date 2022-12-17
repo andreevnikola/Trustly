@@ -13,7 +13,7 @@
 			<a routerLink="auth/login" class="auth">Влез</a>
 		</ng-container>
 		<ng-container *ngIf="authService.loged">
-			<a [routerLink]="'profile/'+name" class="auth">Профил</a>
+			<a [routerLink]="'profile/'+authService.name" class="auth">Профил</a>
 			<a (click)="logoutHandler()" routerLink="/" class="auth" style="color: red;">Изход</a>
 		</ng-container>
 	</nav>
@@ -33,7 +33,7 @@
 			<a (click)="mobileMenuShown = false" routerLink="auth/login" class="authMobile">Влез</a>
 		</ng-container>
 		<ng-container *ngIf="authService.loged">
-			<a (click)="mobileMenuShown = false" [routerLink]="'profile/'+name" class="authMobile">Профил</a><hr>
+			<a (click)="mobileMenuShown = false" [routerLink]="'profile/'+authService.name" class="authMobile">Профил</a><hr>
 			<a (click)="mobileMenuShown = false; logoutHandler()" routerLink="/" class="authMobile" style="color: red;">Изход</a>
 		</ng-container>
 	</nav>
