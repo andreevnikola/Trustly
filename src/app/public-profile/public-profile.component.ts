@@ -35,7 +35,7 @@ export class PublicProfileComponent implements OnInit{
   }
 
   getData(){
-    this.profileService.getDataAboutProfile(this.route.snapshot.paramMap.get('name')!, localStorage.getItem("key")!).subscribe({
+    this.profileService.getDataAboutProfile(this.route.snapshot.paramMap.get('name')!).subscribe({
       next: (value) => {
         this.username = value.name!;
         this.user_mail = value.mail!;

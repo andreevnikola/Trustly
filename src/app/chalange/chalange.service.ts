@@ -40,7 +40,6 @@ export class ChalangeService {
 
   editChalange(
     name: string | null,
-    key: string | null,
     title: string | undefined,
     description: string,
     thumnail: string,
@@ -68,58 +67,57 @@ export class ChalangeService {
       });
     }
 
-    return this.httpClient.post<IError>(`http://localhost:8080/api/chalange/edit/${name}/${key}`, formData);
+    return this.httpClient.post<IError>(`http://localhost:8080/api/chalange/edit/${name}/key`, formData);
   }
 
-  getChalangeById( id: string, key: string | null ){
-    if(!key){ key = "null" }
-    return this.httpClient.get<any>(`http://localhost:8080/api/chalanges/getbyid/${id}/${key}`);
+  getChalangeById( id: string ){
+    return this.httpClient.get<any>(`http://localhost:8080/api/chalanges/getbyid/${id}/key`);
   }
 
-  getChalanges(isFollowing: boolean, key?: string | null, search?: null | string){
+  getChalanges(isFollowing: boolean, search?: null | string){
     if(search){
       return this.httpClient.get<IError>(`http://localhost:8080/api/chalanges/search/${search!}`);
     }
     if(isFollowing){
-      return this.httpClient.get<IError>(`http://localhost:8080/api/chalanges/following/${key!}`);
+      return this.httpClient.get<IError>(`http://localhost:8080/api/chalanges/following/key`);
     }
     return this.httpClient.get<IError>(`http://localhost:8080/api/chalanges/all`);
   }
 
-  likeComment( liker: string, comment: string ){
-    return this.httpClient.get<IError>(`http://localhost:8080/api/chalanges/likecomment/${liker}/${comment}`);
+  likeComment( comment: string ){
+    return this.httpClient.get<IError>(`http://localhost:8080/api/chalanges/likecomment/${comment}/key`);
   }
 
-  dislikeComment( liker: string, comment: string ){
-    return this.httpClient.get<IError>(`http://localhost:8080/api/chalanges/dislikecomment/${liker}/${comment}`);
+  dislikeComment( comment: string ){
+    return this.httpClient.get<IError>(`http://localhost:8080/api/chalanges/dislikecomment/${comment}/key`);
   }
 
-  likeChalange( liker: string, liked: string, chalange: string ){
-    return this.httpClient.get<IError>(`http://localhost:8080/api/chalanges/like/${liker}/${liked}/${chalange}`);
+  likeChalange( liked: string, chalange: string ){
+    return this.httpClient.get<IError>(`http://localhost:8080/api/chalanges/like/${liked}/${chalange}/key`);
   }
 
-  dislikeChalange( liker: string, liked: string, chalange: string ){
-    return this.httpClient.get<IError>(`http://localhost:8080/api/chalanges/will_fail/${liker}/${liked}/${chalange}`);
+  dislikeChalange( liked: string, chalange: string ){
+    return this.httpClient.get<IError>(`http://localhost:8080/api/chalanges/will_fail/${liked}/${chalange}/key`);
   }
 
-  undodislikeChalange( liker: string, liked: string, chalange: string ){
-    return this.httpClient.get<IError>(`http://localhost:8080/api/chalanges/undo_will_fail/${liker}/${liked}/${chalange}`);
+  undodislikeChalange( liked: string, chalange: string ){
+    return this.httpClient.get<IError>(`http://localhost:8080/api/chalanges/undo_will_fail/${liked}/${chalange}/key`);
   }
 
-  undolikeChalange( liker: string, liked: string, chalange: string ){
-    return this.httpClient.get<IError>(`http://localhost:8080/api/chalanges/dislike/${liker}/${liked}/${chalange}`);
+  undolikeChalange( liked: string, chalange: string ){
+    return this.httpClient.get<IError>(`http://localhost:8080/api/chalanges/dislike/${liked}/${chalange}/key`);
   }
 
-  sendComment( commentator: string, message: string, chalange: string ){
-    return this.httpClient.get<IError>(`http://localhost:8080/api/chalanges/comment/${commentator}/${message}/${chalange}`);
+  sendComment( message: string, chalange: string ){
+    return this.httpClient.get<IError>(`http://localhost:8080/api/chalanges/comment/${message}/${chalange}/key`);
   }
 
-  deleteChalange( key: string, chalange: string ){
-    return this.httpClient.get<IError>(`http://localhost:8080/api/chalanges/delete/${key}/${chalange}`);
+  deleteChalange( chalange: string ){
+    return this.httpClient.get<IError>(`http://localhost:8080/api/chalanges/delete/${chalange}/key`);
   }
 
-  deleteComment( key: string, comment: string ){
-    return this.httpClient.get<IError>(`http://localhost:8080/api/chalanges/comment/delete/${key}/${comment}`);
+  deleteComment( comment: string ){
+    return this.httpClient.get<IError>(`http://localhost:8080/api/chalanges/comment/delete/${comment}/key`);
   }
 
 }

@@ -33,8 +33,8 @@ export class AuthService {
     return this.httpClient.get<IUser>(`http://localhost:8080/api/users/login/${name}/${pass}`);
   }
 
-  checkLoged(key: string){
-    return this.httpClient.get<IError>(`http://localhost:8080/api/users/auth/${key}`);
+  checkLoged(){
+    return this.httpClient.get<IError>(`http://localhost:8080/api/users/auth/key`);
   }
 
   checkUsernameExistance(name: string, oldName: string | null){
@@ -42,7 +42,7 @@ export class AuthService {
   }
 
   verifyEmail(mail: string | null, key: string, name: string | null){
-    return this.httpClient.get<IError>(`http://localhost:8080/api/users/activate/${mail}/${key}/${name}`);
+    return this.httpClient.get<IError>(`http://localhost:8080/api/users/activate/${mail}/${name}/${key}`);
   }
 
   activateMail(mail: string | null, name: string | null){

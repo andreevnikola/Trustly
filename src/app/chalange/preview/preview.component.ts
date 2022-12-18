@@ -25,7 +25,7 @@ export class PreviewComponent {
   deleteChalangeHandler(){
     if(!localStorage.getItem("key")){ return }
     this.isDeleting = true;
-    this.chalangeService.deleteChalange(localStorage.getItem("key")!, this.chalange._id).subscribe({
+    this.chalangeService.deleteChalange(this.chalange._id).subscribe({
       next: (value) => {
         if(value.error){
           alert(value.error);

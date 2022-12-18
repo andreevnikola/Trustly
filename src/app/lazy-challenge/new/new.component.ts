@@ -43,7 +43,7 @@ export class NewComponent {
     this.id = this.route.snapshot.paramMap.get('id') || null;
     if(this.id){
       this.loading = true;
-      this.chalangeService.getChalangeById(this.id, localStorage.getItem("key")).subscribe({
+      this.chalangeService.getChalangeById(this.id).subscribe({
         next: (value) => {
           this.loading = false;
           if(value.creator.name !== localStorage.getItem("name")){
@@ -145,7 +145,7 @@ export class NewComponent {
   }
 
   editChalangeHandler(){
-    this.chalangeService.editChalange(localStorage.getItem("name"), localStorage.getItem("key"), this.uploadData.title, this.uploadData.description, this.uploadData.thumnail, this.uploadData.status, this.uploadData.steps, this.files, this.id!, this.forDelete ? JSON.stringify(this.forDelete!) : "null")?.subscribe({
+    this.chalangeService.editChalange(localStorage.getItem("name"), this.uploadData.title, this.uploadData.description, this.uploadData.thumnail, this.uploadData.status, this.uploadData.steps, this.files, this.id!, this.forDelete ? JSON.stringify(this.forDelete!) : "null")?.subscribe({
       next: (value: any) => {
           this.loading = false;
           if(value.error){

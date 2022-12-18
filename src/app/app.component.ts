@@ -10,7 +10,7 @@ import { AuthService } from './auth/auth.service';
 export class AppComponent {
   constructor( private authService: AuthService, private router: Router ){
     if(localStorage.getItem("key")){
-      this.authService.checkLoged(localStorage.getItem("key")!).subscribe({
+      this.authService.checkLoged().subscribe({
         next: (value) => {
             this.authService.loged = true;
         }

@@ -32,7 +32,7 @@ export class ChalangesComponent implements OnInit {
   }
 
   getData(){
-    this.chalangeService.getChalanges(this.isFollowing, localStorage.getItem("key"), this.search).subscribe({
+    this.chalangeService.getChalanges(this.isFollowing, this.search).subscribe({
       next: (value: any) => {
         this.loading = false;
         if(value.error){

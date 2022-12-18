@@ -9,9 +9,8 @@ export class ProfileService {
 
   constructor(private httpClient: HttpClient) { }
 
-  getDataAboutProfile(name: string, key: string | null){
-    if(!key){ key = "null" }
-    return this.httpClient.get<IUser>(`http://localhost:8080/api/users/profile/${name}/${key}`);
+  getDataAboutProfile(name: string){
+    return this.httpClient.get<IUser>(`http://localhost:8080/api/users/profile/${name}/key`);
   }
 
   getChalangesByProfile(profile: string){

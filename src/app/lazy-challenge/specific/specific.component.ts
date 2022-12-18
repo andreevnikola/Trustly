@@ -57,7 +57,7 @@ export class SpecificComponent implements OnInit{
 
   getData(){
     this.id = this.route.snapshot.paramMap.get('id');
-    this.chalangeService.getChalangeById(this.id!, localStorage.getItem('key')).subscribe({
+    this.chalangeService.getChalangeById(this.id!).subscribe({
       next: (value: any) => {
         if(value?.error){
           this.router.navigate(['/']);
@@ -71,7 +71,7 @@ export class SpecificComponent implements OnInit{
         value.comments?.map((comment: any) => {
           this.likedComments.push(comment.likers?.includes(this.myUserName) ? comment._id : null)
         });
-        this.profileService.getDataAboutProfile(this.user?.name!, localStorage.getItem("key")).subscribe({
+        this.profileService.getDataAboutProfile(this.user?.name!).subscribe({
           next: (value: any) => {
             this.username = value.name!;
             this.user_mail = value.mail!;
@@ -139,7 +139,7 @@ export class SpecificComponent implements OnInit{
     if(this.disliked){
       this.undodislikeChalangeHadnler();
     }
-    this.chalangeService.likeChalange(localStorage.getItem("key")!, this.profile_id!, this.id!).subscribe({
+    this.chalangeService.likeChalange(this.profile_id!, this.id!).subscribe({
       next: (value: any) => {
         if(value.error){
           alert(value.error);
@@ -157,7 +157,7 @@ export class SpecificComponent implements OnInit{
   }
 
   undolikeChalangeHadnler(){
-    this.chalangeService.undolikeChalange(localStorage.getItem("key")!, this.profile_id!, this.id!).subscribe({
+    this.chalangeService.undolikeChalange(this.profile_id!, this.id!).subscribe({
       next: (value: any) => {
         if(value.error){
           alert(value.error);
@@ -178,7 +178,7 @@ export class SpecificComponent implements OnInit{
     if(this.liked){
       this.undolikeChalangeHadnler();
     }
-    this.chalangeService.dislikeChalange(localStorage.getItem("key")!, this.profile_id!, this.id!).subscribe({
+    this.chalangeService.dislikeChalange(this.profile_id!, this.id!).subscribe({
       next: (value: any) => {
         if(value.error){
           alert(value.error);
@@ -195,7 +195,7 @@ export class SpecificComponent implements OnInit{
   }
 
   undodislikeChalangeHadnler(){
-    this.chalangeService.undodislikeChalange(localStorage.getItem("key")!, this.profile_id!, this.id!).subscribe({
+    this.chalangeService.undodislikeChalange(this.profile_id!, this.id!).subscribe({
       next: (value: any) => {
         if(value.error){
           alert(value.error);
@@ -212,7 +212,7 @@ export class SpecificComponent implements OnInit{
 
   sendCommentHandler(message: string){
     if(!localStorage.getItem('key')){ return; }
-    this.chalangeService.sendComment(localStorage.getItem('key')!, message, this.id!).subscribe({
+    this.chalangeService.sendComment(message, this.id!).subscribe({
       next: (value: any) => {
         const raw_date = new Date();
         const for_upload_date = raw_date.toLocaleDateString();
@@ -235,7 +235,7 @@ export class SpecificComponent implements OnInit{
 
   likeCommentHandler(index: number){
     if( !localStorage.getItem("key") ){ return }
-    this.chalangeService.likeComment(localStorage.getItem("key")!, this.comments![index]._id).subscribe({
+    this.chalangeService.likeComment(this.comments![index]._id).subscribe({
       next: (value) => {
         if(value.error){
           alert(value.error);
@@ -255,7 +255,7 @@ export class SpecificComponent implements OnInit{
 
   dislikeCommentHandler(index: number){
     if( !localStorage.getItem("key") ){ return }
-    this.chalangeService.dislikeComment(localStorage.getItem("key")!, this.comments![index]._id).subscribe({
+    this.chalangeService.dislikeComment(this.comments![index]._id).subscribe({
       next: (value) => {
         if(value.error){
           alert(value.error);
@@ -274,7 +274,7 @@ export class SpecificComponent implements OnInit{
 
   deleteCommentHandler(index: number){
     let comment = this.comments![index]._id;
-    this.chalangeService.deleteComment(localStorage.getItem('key')!, comment).subscribe({
+    this.chalangeService.deleteComment(comment).subscribe({
       next: (value) => {
         if(value.error){
           alert(value.error);
