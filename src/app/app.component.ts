@@ -12,12 +12,7 @@ export class AppComponent {
     if(localStorage.getItem("key")){
       this.authService.checkLoged(localStorage.getItem("key")!).subscribe({
         next: (value) => {
-          if(!value.error){
             this.authService.loged = true;
-          }else{
-            localStorage.clear();
-            router.navigate(['/auth/login']);
-          }
         }
       });
     }

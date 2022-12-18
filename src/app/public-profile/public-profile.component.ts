@@ -71,11 +71,6 @@ export class PublicProfileComponent implements OnInit{
         if(value.error === "Вече сте абонирани за този потребител!"){
           alert(value.error)
         }
-        if(value.error){
-          localStorage.clear();
-          this.router.navigate(["/login"]);
-          return;
-        }
         this.subscribed = true;
         this.subs = (parseInt(this.subs) + 1).toString();
       },
@@ -89,11 +84,6 @@ export class PublicProfileComponent implements OnInit{
   unsubscribeHandler(){
     this.profileService.unsubscribeFromUser(localStorage.getItem("key")!, this.profile_id).subscribe({
       next: (value) => {
-        if(value.error){
-          localStorage.clear();
-          this.router.navigate(["/login"]);
-          return;
-        }
         this.subscribed = false;
         this.subs = (parseInt(this.subs) - 1).toString();
       },

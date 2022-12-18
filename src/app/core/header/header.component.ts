@@ -35,7 +35,7 @@ export class HeaderComponent {
   }
 
   searchHanfler(input: string){
-    this.router.navigate(['/search/'+input]);
+    this.router.navigate(['/challenge/search/'+input]);
     this.mobileMenuShown = false;
   }
 

@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from '../auth.guard';
-import { ChalangesComponent } from './chalanges/chalanges.component';
+import { ChalangesComponent } from '../chalange/chalanges/chalanges.component';
 import { FollowedComponent } from './followed/followed.component';
 import { NewComponent } from './new/new.component';
 import { SearchComponent } from './search/search.component';

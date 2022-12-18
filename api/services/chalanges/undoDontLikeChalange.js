@@ -7,6 +7,7 @@ async function undoDontLikeChalange(req, res){
         let db = await new CRUD("trustly", "users");
         let chalanges = await new CRUD("trustly", "chalanges");
         const user = await db.Read( {key: disliker} );
+        if(!user){ res.status(401).send(); return; }
         const chalangeId = new ObjectId(chalange);
         const dislikerId = user._id;
         let isDisLiked = false;

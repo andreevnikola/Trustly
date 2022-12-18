@@ -44,7 +44,7 @@ async function getProfileData(req, res){
             mail: ret.mail,
             logo: ret.logo,
             chalanges_nmb: 0,
-            subs: ret.subs ? ret.subs : "0",
+            subs: ret.subscribers ? ret.subscribers.length : "0",
             likes: ret.likes ? ret.likes : "0",
             reports: ret.reports ? ret.reports : "0",
             id: ret._id.toString(),

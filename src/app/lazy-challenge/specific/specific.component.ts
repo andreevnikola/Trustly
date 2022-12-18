@@ -2,7 +2,7 @@ import { Component, OnInit  } from '@angular/core';
 import { ActivatedRoute, Router, Event, RouterEvent, NavigationEnd } from '@angular/router';
 import { ProfileService } from 'src/app/profile.service';
 import { IUser } from 'src/app/shared/interfaces';
-import { ChalangeService } from '../chalange.service';
+import { ChalangeService } from 'src/app/chalange/chalange.service';
 import {
   trigger,
   style,
@@ -102,11 +102,6 @@ export class SpecificComponent implements OnInit{
       next: (value: any) => {
         if(value.error === "Вече сте абонирани за този потребител!"){
           alert(value.error)
-        }
-        if(value.error){
-          localStorage.clear();
-          this.router.navigate(["/login"]);
-          return;
         }
         this.subscribed = true;
         this.subs = (parseInt(this.subs) + 1).toString();
@@ -219,12 +214,6 @@ export class SpecificComponent implements OnInit{
     if(!localStorage.getItem('key')){ return; }
     this.chalangeService.sendComment(localStorage.getItem('key')!, message, this.id!).subscribe({
       next: (value: any) => {
-        if(value.error){
-          console.log(value.error)
-          alert("В акаунта ви се случило ново влизане! Влезте в аканунта си отонво!");
-          this.router.navigate(['/auth/login']);
-          return;
-        }
         const raw_date = new Date();
         const for_upload_date = raw_date.toLocaleDateString();
         const time = raw_date.toTimeString().slice(0, 5);

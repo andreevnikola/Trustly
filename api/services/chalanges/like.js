@@ -7,6 +7,8 @@ async function like(req, res){
         let db = await new CRUD("trustly", "users");
         let chalanges = await new CRUD("trustly", "chalanges");
         const user = await db.Read( {key: liker} );
+        console.log("user: " + user)
+        if(!user){ console.log('koza'); res.status(401).send(); return; }
         const likedId = new ObjectId(liked);
         const chalangeId = new ObjectId(chalange);
         const likerId = user._id;

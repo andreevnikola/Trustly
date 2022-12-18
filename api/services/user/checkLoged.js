@@ -8,7 +8,7 @@ async function checkLoged(req, res){
             key: key
         });
         if(!exists){
-            res.status(200).send({
+            res.status(400).send({
                 error: "Key not found"
             });
             return;

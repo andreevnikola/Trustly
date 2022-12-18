@@ -7,7 +7,7 @@
         <div id="chalanges">
             <h1 *ngIf="(data?.length < 1 || !data) && (profiles?.length < 1 || !profiles)" id="notFoundAnyResults">
                 <ng-container *ngIf="!isFollowing && !search">
-                    Няма качени ЧАЛИНДЖИ! Не се срамувай бъди първи! <a routerLink="chalange/upload">Кликни ТУК</a>
+                    Няма качени ЧАЛИНДЖИ! Не се срамувай бъди първи! <a routerLink="challenge/upload">Кликни ТУК</a>
                 </ng-container>
                 <ng-container *ngIf="!isFollowing && search">
                     Няма намерени резултати! :(

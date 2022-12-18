@@ -2,8 +2,8 @@
 	<nav id="mainMenu">
 		<a routerLink="/" id="withImage"><img src="assets/images/logo_without_bg.png" alt=""></a>
 		<a routerLink="/">Начало</a>
-		<a routerLink="chalange/followed">Следвани</a>
-		<a routerLink="chalange/upload">Сподели</a>
+		<a routerLink="challenge/followed">Следвани</a>
+		<a routerLink="challenge/upload">Сподели</a>
 		<span id="seracher">
 			<button (click)="searchHanfler(input.value)"><img src="assets/svg/magnifying-glass-solid.svg" alt="search"></button>
 			<input type="search" placeholder="Търси" #input>
@@ -26,8 +26,8 @@
 		</span><hr>
 		<a (click)="mobileMenuShown = false" routerLink="/" id="withImageMobile"><img src="assets/images/logo_without_bg.png" alt=""></a>
 		<a (click)="mobileMenuShown = false" routerLink="/">Начало</a><hr>
-		<a (click)="mobileMenuShown = false" routerLink="chalange/followed">Следвани</a><hr>
-		<a (click)="mobileMenuShown = false" routerLink="chalange/upload">Сподели</a><hr>
+		<a (click)="mobileMenuShown = false" routerLink="challenge/followed">Следвани</a><hr>
+		<a (click)="mobileMenuShown = false" routerLink="challenge/upload">Сподели</a><hr>
 		<ng-container *ngIf="!authService.loged">
 			<a (click)="mobileMenuShown = false" routerLink="auth/join" class="authMobile">Приседини се</a><hr>
 			<a (click)="mobileMenuShown = false" routerLink="auth/login" class="authMobile">Влез</a>

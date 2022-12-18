@@ -7,7 +7,7 @@
     <p class="title">{{chalange.title}}</p>
     <p class="date">{{chalange.date}}</p>
     <div id="functions" *ngIf="creator === myUserName">
-        <a [routerLink]="'/edit/'+chalange._id" *ngIf="chalange.status !== 'завършен'"><button id="edit"><img src="assets/svg/edit.svg" alt="edit"></button></a>
+        <a [routerLink]="'/challenge/edit/'+chalange._id" *ngIf="chalange.status !== 'завършен'"><button id="edit"><img src="assets/svg/edit.svg" alt="edit"></button></a>
         <button id="delete" (click)="deleteChalangeHandler()"><img src="assets/svg/trash-can-solid.svg" alt="delete"></button>
     </div>
     <div class="description" markdown [data]="chalange.description"></div>

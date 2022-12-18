@@ -6,6 +6,7 @@ async function unsubscribe(req, res){
         let { subscriber, subscribed } = req.params;
         let db = await new CRUD("trustly", "users");
         const user = await db.Read( {key: subscriber} );
+        if(!user){ res.status(401).send(); return; }
         const subscribedId = new ObjectId(subscribed);
         const subscriberId = user._id;
         let isSubbed = user.following?.includes(subscribed);

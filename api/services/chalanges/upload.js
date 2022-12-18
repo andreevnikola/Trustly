@@ -17,7 +17,7 @@ async function Upload(req, res) {
       activated: true
     });
     if (!result) {
-      res.status(200).send({
+      res.status(401).send({
         error: "Нямате права за извършването на това действие!",
       });
       return;

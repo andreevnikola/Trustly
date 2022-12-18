@@ -12,8 +12,8 @@ const routes: Routes = [
     component: MainComponent
   },
   {
-    path: 'chalange',
-    loadChildren: () => import('./chalange/chalange.module').then(m => m.ChalangeModule)
+    path: 'challenge',
+    loadChildren: () => import('./lazy-challenge/lazy-challenge.module').then(m => m.LazyChallengeModule)
   },
   {
     path: 'auth',

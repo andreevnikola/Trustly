@@ -8,7 +8,7 @@ async function comment(req, res){
         let users = await new CRUD("trustly", "users");
         const commentator = (await users.Read({ key: commentatorKey }))._id;
         if(!commentator){
-            res.send({
+            res.status(401).send({
                 error: 'Акаунта Ви не е намерен!'
             });
             return;

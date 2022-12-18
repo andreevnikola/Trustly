@@ -10,6 +10,7 @@ import { SharedModule } from './shared/shared.module';
 import { CommonModule } from '@angular/common';
 import { PublicProfileComponent } from './public-profile/public-profile.component';
 import { ChalangeModule } from './chalange/chalange.module';
+import { appInterceptorProvider } from './app.interceptor';
 
 
 @NgModule({
@@ -27,7 +28,7 @@ import { ChalangeModule } from './chalange/chalange.module';
     HttpClientModule,
     CommonModule,
   ],
-  providers: [],
+  providers: [ appInterceptorProvider ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -19,7 +19,7 @@ export class PreviewComponent {
 
   maximizeChalangeHandler(){
     if(this.isDeleting){ return }
-    this.router.navigate(['/chalange/detail/' + this.chalange._id]);
+    this.router.navigate(['/challenge/detail/' + this.chalange._id]);
   }
 
   deleteChalangeHandler(){

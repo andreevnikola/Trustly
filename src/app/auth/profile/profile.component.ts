@@ -71,7 +71,7 @@ export class ProfileComponent {
           this.passwordNotWright = true;
           return
         }
-        if(value.mailIsChanged){ console.log('baba ti e mnogo seksi'); this.confirmed = null; localStorage.removeItem('activated') }
+        if(value.mailIsChanged){ this.confirmed = null; localStorage.removeItem('activated') }
         localStorage.setItem("name", this.name_!);
         localStorage.setItem("mail", this.mail_!);
         localStorage.setItem("key", value.key!);

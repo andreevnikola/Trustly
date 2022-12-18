@@ -7,6 +7,7 @@ async function dislikeComment(req, res){
         let db = await new CRUD("trustly", "comments");
         let users = await new CRUD("trustly", "users");
         const user = (await users.Read({ key: liker }))._id;
+        if(!user){ res.status(401).send(); return; }
         const commentID = new ObjectId(comment);
         const data = await db.Read({ _id: commentID });
         let isLiked = false;

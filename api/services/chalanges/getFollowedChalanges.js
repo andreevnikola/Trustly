@@ -6,6 +6,7 @@ async function getFollowedChalanges(req, res){
         let db = await new CRUD("trustly", "chalanges");
         let users = await new CRUD("trustly", "users");
         const user = await users.Read({ key: key });
+        if(!user){ req.status(401).send(); return; }
         const isLiking = user.liking;
         const isDisLiking = user.disliking;
         if(!isLiking && !isDisLiking){

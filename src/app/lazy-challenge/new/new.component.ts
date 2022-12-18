@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from 'src/app/auth/auth.service';
-import { ChalangeService } from '../chalange.service';
+import { ChalangeService } from 'src/app/chalange/chalange.service';
 
 @Component({
   selector: 'app-new',
@@ -169,9 +169,6 @@ export class NewComponent {
     this.chalangeService.uploadChalange(localStorage.getItem("name"), localStorage.getItem("key"), this.uploadData.title, this.uploadData.description, this.uploadData.thumnail, this.uploadData.status, this.uploadData.steps, this.files)?.subscribe({
       next: (value) => {
           this.loading = false;
-          if(value.error){
-            this.router.navigate(["/auth/login"]);
-          }
           this.router.navigate(["/profile/"+localStorage.getItem("name")]);
       },
       error: (err) => {
